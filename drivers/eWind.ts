@@ -129,17 +129,22 @@ export class eWind extends Homey.Device {
         }
 
         if (result['status_mode'] && result['status_mode'].value !== 'xxx') {
-            let statusValue = result['status_mode'].value;
-            if (statusValue === "0") { 
-                await this.setIfChanged('eWindstatus_mode', '0');
-            } else if (statusValue === "16") {
-                await this.setIfChanged('eWindstatus_mode', '1');
-            } else if (statusValue === "1024") {
-                await this.setIfChanged('eWindstatus_mode', '2');
-            } else if (statusValue === "512") {
-                await this.setIfChanged('eWindstatus_mode', '3');
+            // A bit field: several states can be active at once and the register
+            // holds their sum. It is read as a signed 16-bit value, so the top bit
+            // (defrosting) arrives negative until masked.
+            const state = Number(result['status_mode'].value) & 0xffff;
+            let mode = '0';
+            if (state & (4 | 8)) {
+                mode = '4'; // emergency stop, stop
+            } else if (state & 1024) {
+                mode = '2'; // overpressure
+            } else if (state & 512) {
+                mode = '3'; // manual boost
+            } else if (state & (16 | 32)) {
+                mode = '1'; // away, long away
             }
-        }  
+            await this.setIfChanged('eWindstatus_mode', mode);
+        }
 
         if (result['eco_mode'] && result['eco_mode'].value !== 'xxx') {
                 let ecomode_value = result['eco_mode'].value;
