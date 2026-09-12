@@ -1240,8 +1240,8 @@
           {
             "type": "range",
             "name": "temperature",
-            "min": 15,
-            "max": 22,
+            "min": 10,
+            "max": 30,
             "step": 1
           }
         ]
@@ -1374,8 +1374,8 @@
           {
             "type": "range",
             "name": "temperature",
-            "min": 15,
-            "max": 22,
+            "min": 10,
+            "max": 30,
             "step": 1
           }
         ]
