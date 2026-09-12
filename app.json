@@ -378,6 +378,175 @@
             ]
           }
         ]
+      },
+      {
+        "id": "alarm_b_triggered_freeway",
+        "title": {
+          "en": "Filteralarm",
+          "no": "Filteralarm"
+        },
+        "titleFormatted": {
+          "en": "Filter alarm triggered",
+          "no": "Filteralarm utløst"
+        },
+        "hint": {
+          "en": "Filter needs replacement",
+          "no": "Filter må byttes"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=freewayWeb"
+          }
+        ]
+      },
+      {
+        "id": "eWindstatus_mode_changed_freeway",
+        "title": {
+          "en": "Mode changed to",
+          "no": "Modus endret til"
+        },
+        "titleFormatted": {
+          "en": "Mode changed to [[mode_title]]",
+          "no": "Modus endret til [[mode_title]]"
+        },
+        "hint": {
+          "en": "Ventilation changed mode",
+          "no": "Ventilasjon endret status"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=freewayWeb"
+          },
+          {
+            "name": "mode_title",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "Home",
+                  "no": "Hjemme"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "Away",
+                  "no": "Borte"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Fireplace",
+                  "no": "Peismodus"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Boost",
+                  "no": "Boost"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Off",
+                  "no": "Av"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "heat_exchanger_mode_changed_freeway",
+        "title": {
+          "en": "Heat exchanger changed to",
+          "no": "Varmeveksler endret til"
+        },
+        "titleFormatted": {
+          "en": "Heat exchanger changed to [[mode_title]]",
+          "no": "Varmeveksler endret til [[mode_title]]"
+        },
+        "hint": {
+          "en": "Heat exchanger mode was changed",
+          "no": "Varmeveksler endret status"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=freewayWeb"
+          },
+          {
+            "name": "mode_title",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "On",
+                  "no": "På"
+                }
+              },
+              {
+                "id": "0",
+                "label": {
+                  "en": "Off",
+                  "no": "Av"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "heater_mode_changed_freeway",
+        "title": {
+          "en": "Heater changed to",
+          "no": "Varmeelement endret til"
+        },
+        "titleFormatted": {
+          "en": "Heater changed to [[mode_title]]",
+          "no": "Varmeelement endret til [[mode_title]]"
+        },
+        "hint": {
+          "en": "Heater mode was changed",
+          "no": "Varmeelement endret status"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=freewayWeb"
+          },
+          {
+            "name": "mode_title",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "On",
+                  "no": "På"
+                }
+              },
+              {
+                "id": "0",
+                "label": {
+                  "en": "Off",
+                  "no": "Av"
+                }
+              }
+            ]
+          }
+        ]
       }
     ],
     "conditions": [
@@ -628,6 +797,141 @@
             "type": "device",
             "name": "device",
             "filter": "driver_id=eWind"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "On",
+                  "no": "På"
+                }
+              },
+              {
+                "id": "0",
+                "label": {
+                  "en": "Off",
+                  "no": "Av"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "eWindstatus_mode_is_freeway",
+        "title": {
+          "en": "eWind status mode is",
+          "no": "eWind modus er"
+        },
+        "titleFormatted": {
+          "en": "eWind status mode is [[mode]]",
+          "no": "eWind modus er [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=freewayWeb"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "Home",
+                  "no": "Hjemme"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "Away",
+                  "no": "Borte"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Fireplace",
+                  "no": "Peismodus"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Boost",
+                  "no": "Boost"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Off",
+                  "no": "Av"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "heat_exchanger_mode_is_freeway",
+        "title": {
+          "en": "Heat exchanger mode is",
+          "no": "Varmeveksler er"
+        },
+        "titleFormatted": {
+          "en": "Heat exchanger mode is [[mode]]",
+          "no": "Varmeveksler er [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=freewayWeb"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "On",
+                  "no": "På"
+                }
+              },
+              {
+                "id": "0",
+                "label": {
+                  "en": "Off",
+                  "no": "Av"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "heater_mode_is_freeway",
+        "title": {
+          "en": "Heater mode is",
+          "no": "Varmeelement er"
+        },
+        "titleFormatted": {
+          "en": "Heating element is [[mode]]",
+          "no": "Varmeelement er [[mode]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=freewayWeb"
           },
           {
             "name": "mode",
@@ -961,6 +1265,182 @@
             "type": "device",
             "name": "device",
             "filter": "driver_id=eWind"
+          },
+          {
+            "type": "dropdown",
+            "name": "mode",
+            "values": [
+              {
+                "id": "0",
+                "label": {
+                  "en": "Home",
+                  "no": "Hjemme"
+                }
+              },
+              {
+                "id": "1",
+                "label": {
+                  "en": "Away",
+                  "no": "Borte"
+                }
+              },
+              {
+                "id": "2",
+                "label": {
+                  "en": "Fireplace",
+                  "no": "Peismodus"
+                }
+              },
+              {
+                "id": "3",
+                "label": {
+                  "en": "Boost",
+                  "no": "Boost"
+                }
+              },
+              {
+                "id": "4",
+                "label": {
+                  "en": "Off",
+                  "no": "Av"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecomode_freeway",
+        "title": {
+          "en": "Set ecomode to ",
+          "no": "Sett økomodus til "
+        },
+        "titleFormatted": {
+          "en": "Set ecomode to [[ecomode]]",
+          "no": "Sett økomodus til [[ecomode]]"
+        },
+        "hint": {
+          "en": "Set ecomode to",
+          "no": "Sett økomodus til"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=freewayWeb"
+          },
+          {
+            "type": "dropdown",
+            "name": "ecomode",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "active",
+                  "no": "aktiv"
+                }
+              },
+              {
+                "id": "0",
+                "label": {
+                  "en": "inactive",
+                  "no": "inaktiv"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "heatingcoil_freeway",
+        "title": {
+          "en": "Set heatingcoil to",
+          "no": "Sett varmekolbe til"
+        },
+        "titleFormatted": {
+          "en": "Set heatingcoil to [[heatingcoil]]",
+          "no": "Sett varmekolbe til [[heatingcoil]]"
+        },
+        "hint": {
+          "en": "Set heatingcoil to",
+          "no": "Sett varmekolbe til"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=freewayWeb"
+          },
+          {
+            "type": "dropdown",
+            "name": "heatingcoil",
+            "values": [
+              {
+                "id": "1",
+                "label": {
+                  "en": "active",
+                  "no": "aktiv"
+                }
+              },
+              {
+                "id": "0",
+                "label": {
+                  "en": "inactive",
+                  "no": "inaktiv"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set-temperature_freeway",
+        "title": {
+          "en": "Set temperature",
+          "no": "Sett temperatur"
+        },
+        "titleFormatted": {
+          "en": "Set temperature to [[temperature]]",
+          "no": "Sett temperatur til [[temperature]]"
+        },
+        "hint": {
+          "en": "Set target temperature",
+          "no": "Sett måltemperatur"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=freewayWeb"
+          },
+          {
+            "type": "range",
+            "name": "temperature",
+            "min": 15,
+            "max": 22,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "status-mode_freeway",
+        "title": {
+          "en": "Set mode to ",
+          "no": "Sett modus til "
+        },
+        "titleFormatted": {
+          "en": "Set mode to [[mode]]",
+          "no": "Sett modus til [[mode]]"
+        },
+        "hint": {
+          "en": "Set mode to",
+          "no": "Sett modus til "
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=freewayWeb"
           },
           {
             "type": "dropdown",
@@ -1403,6 +1883,205 @@
         }
       ],
       "id": "eWind"
+    },
+    {
+      "name": {
+        "en": "Freeway WEB"
+      },
+      "class": "other",
+      "capabilities": [
+        "efficiency.supplyEff",
+        "efficiency.extractEff",
+        "measure_temperature.outsideAir",
+        "measure_temperature.exhaustAir",
+        "measure_temperature.extractAir",
+        "measure_temperature.supplyAirHRC",
+        "ecomode_mode",
+        "measure_temperature.step",
+        "heater_mode",
+        "heat_exchanger_mode",
+        "target_temperature.step",
+        "alarm_b.desc",
+        "measure_humidity.extractAir",
+        "fanspeed_level",
+        "eWindstatus",
+        "eWindstatus_mode",
+        "lastPollTime",
+        "heating_coil_state"
+      ],
+      "capabilitiesOptions": {
+        "measure_temperature.exhaustAir": {
+          "title": {
+            "en": "Exhaust Air",
+            "no": "Utkast"
+          }
+        },
+        "measure_temperature.extractAir": {
+          "title": {
+            "en": "Extract Air temperature",
+            "no": "Avtrekk"
+          }
+        },
+        "measure_temperature.outsideAir": {
+          "title": {
+            "en": "Fresh Air",
+            "no": "Inntak"
+          }
+        },
+        "measure_temperature.supplyAirHRC": {
+          "title": {
+            "en": "Supply Air after Heat recovery",
+            "no": "Tilluft etter varmegjenvinning"
+          }
+        },
+        "measure_temperature.step": {
+          "title": {
+            "en": "Supply Air",
+            "no": "Tilluft"
+          }
+        },
+        "measure_humidity.extractAir": {
+          "title": {
+            "en": "Extract Air humidity",
+            "no": "Avtrekksfuktighet"
+          }
+        },
+        "efficiency.supplyEff": {
+          "title": {
+            "en": "Supply air efficiency",
+            "no": "Tilluftseffektivitet"
+          }
+        },
+        "efficiency.extractEff": {
+          "title": {
+            "en": "Exhaust Air efficiency",
+            "no": "Avtrekkseffektivitet"
+          }
+        },
+        "heater_mode": {
+          "title": {
+            "en": "Heating element",
+            "no": "Varmeelement"
+          }
+        },
+        "heat_exchanger_mode": {
+          "title": {
+            "en": "Heat exchanger",
+            "no": "Varmeveksler"
+          }
+        },
+        "heating_coil_state": {
+          "title": {
+            "en": "Heatingcoil",
+            "no": "Varmespole"
+          }
+        },
+        "alarm_b.desc": {
+          "title": {
+            "en": "Filteralarm",
+            "no": "Filteralarm"
+          }
+        },
+        "fanspeed_level": {
+          "title": {
+            "en": "Fan speed level",
+            "no": "Viftenivå"
+          }
+        },
+        "eWindstatus": {
+          "title": {
+            "en": "Status",
+            "no": "Status"
+          }
+        },
+        "eWindstatus_mode": {
+          "title": {
+            "en": "Mode",
+            "no": "Modus"
+          }
+        },
+        "ecomode_mode": {
+          "title": {
+            "en": "Ecomode",
+            "no": "Økomodus"
+          }
+        },
+        "target_temperature.step": {
+          "min": 15,
+          "max": 22,
+          "step": 1,
+          "title": {
+            "en": "Target temperature",
+            "no": "Ønsket temperatur"
+          }
+        },
+        "lastPollTime": {
+          "title": {
+            "en": "Last poll time",
+            "no": "Siste polling"
+          }
+        }
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/freewayWeb/assets/images/small.jpg",
+        "large": "/drivers/freewayWeb/assets/images/large.jpg"
+      },
+      "pair": [
+        {
+          "id": "start"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Freeway WEB settings",
+            "no": "Freeway WEB-innstillinger"
+          },
+          "children": [
+            {
+              "id": "address",
+              "type": "text",
+              "value": "0.0.0.0",
+              "label": {
+                "en": "IP Address"
+              }
+            },
+            {
+              "id": "port",
+              "type": "number",
+              "value": 502,
+              "step": 1,
+              "label": {
+                "en": "Port"
+              }
+            },
+            {
+              "id": "unitId",
+              "type": "number",
+              "value": 1,
+              "min": 1,
+              "max": 255,
+              "step": 1,
+              "label": {
+                "en": "Modbus slave ID",
+                "no": "Modbus slave-ID"
+              },
+              "hint": {
+                "en": "Freeway WEB presents the ventilation unit on slave ID 1. Only change this if your setup differs.",
+                "no": "Freeway WEB presenterer aggregatet på slave-ID 1. Endre kun hvis oppsettet ditt avviker."
+              }
+            }
+          ]
+        }
+      ],
+      "id": "freewayWeb"
     }
   ],
   "capabilities": {

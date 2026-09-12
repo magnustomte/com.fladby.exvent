@@ -1,0 +1,97 @@
+<script type="text/javascript">
+
+Homey.setTitle( __('pair.freeway.title') );
+
+$(function() {
+	$('#connect').click(function() {
+    $('.freewayWeb-error').hide();
+
+    var inputaddress = $('#address').val();
+    var inputport = Number($('#port').val());
+
+    var deviceId = Math.random().toString(36).substr(2,5).toLowerCase();
+    var id = Math.round(Math.random() * (100000 - 10000) + 10000);
+
+    if (inputaddress != '' && inputport != '') {
+      var device_data = {
+        id:  deviceId
+      };
+
+      var settings = {
+        address : inputaddress,
+        port    : inputport,
+      };
+
+      Homey.addDevice({
+        name   : 'exvent_' + deviceId,
+        data 	 : device_data,
+        settings : settings
+      }, function(error, result) {
+        if (error) {
+            $('.freewayWeb-error').show();
+            $('.freewayWeb-error-msg').html(error.message || error.toString() );
+        }
+        $('.freewayWeb-error').hide();
+
+        Homey.done();
+      })
+
+    } else {
+        $('.freewayWeb-error').show();
+        $('.freewayWeb-error-msg').html( __('pair.nosettings') );
+    }
+
+	});
+})
+</script>
+
+<style type="text/css">
+  .form-group {
+    width: 100%;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .form-group label {
+    display: block;
+  }
+  .freewayWeb-status, .freewayWeb-info {
+		display: none;
+	}
+  .freewayWeb-info {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .freewayWeb-info .info-label {
+    min-width: 150px;
+    font-weight: 700;
+  }
+  .buttons, .messages {
+    padding-top: 14px;
+  }
+  .button:disabled {
+    color: #ccc;
+  }
+  .button:enabled {
+    background-color: #00c139 !important;
+    color: #fff;
+  }
+</style>
+
+<p data-i18n="pair.freeway.intro">Enter the IP address and port of your Freeway WEB adapter. Enable Modbus/TCP in the Freeway web interface first, with your Homey's IP address as the Modbus/TCP client.</p>
+<div class="freewayWeb-pairing">
+  <div class="form-group">
+    <label for="address" data-i18n="pair.address">IP address</label>
+    <input type="text" class="form-control" id="address" placeholder="0.0.0.0" required>
+  </div>
+  <div class="form-group">
+  	<label for="port" data-i18n="pair.port">Port</label>
+  	<input type="number" class="form-control" id="port" placeholder="502" value="502" required>
+  </div>
+  <div class="form-group buttons">
+    <button id="connect" class="button" data-i18n="pair.connect">Connect</button>
+  </div>
+</div>
+
+<div class="messages">
+  <p class="freewayWeb-status freewayWeb-error" style="color: #ff6300;"><i class="fa fa-times"></i> <span class="freewayWeb-error-msg"></span></p>
+</div>

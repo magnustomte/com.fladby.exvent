@@ -1,15 +1,18 @@
 {
-    "pair": {
-      "title": "Legg til eWind ventilasjonssystem",
-      "nosettings": "Vennligst fyll inn alle tomme felter.",
-      "intro": "Skriv inn IP-Adressen og porten på eWind Wifi-enheten og verifiser at du har satt Modbus TCP til ON i Exvent appen.",
-      "address": "IP-Addresse",
-      "port": "Port",
-      "deviceid": "Enhets-ID",
-      "connect": "Koble til"
-    },
-    "Unreachable": "Unreachable",
-    "Off": "Av",
-    "NA": "Ikke tilgjengelig"
-  }
-  
+  "pair": {
+    "title": "Legg til eWind ventilasjonssystem",
+    "nosettings": "Vennligst fyll inn alle tomme felter.",
+    "intro": "Skriv inn IP-Adressen og porten på eWind Wifi-enheten og verifiser at du har satt Modbus TCP til ON i Exvent appen.",
+    "address": "IP-Addresse",
+    "port": "Port",
+    "deviceid": "Enhets-ID",
+    "connect": "Koble til",
+    "freeway": {
+      "title": "Legg til Freeway WEB ventilasjonssystem",
+      "intro": "Skriv inn IP-adressen og porten til Freeway WEB-adapteren. Aktiver først Modbus/TCP i Freeway sitt eget webgrensesnitt: Configuration → Access control configuration, skriv IP-adressen til Homey i «IP address of Modbus/TCP client» og klikk Save Modbus/TCP. Før det avviser adapteren tilkoblinger på port 502."
+    }
+  },
+  "Unreachable": "Unreachable",
+  "Off": "Av",
+  "NA": "Ikke tilgjengelig"
+}

@@ -1,0 +1,432 @@
+{
+  "actions": [
+    {
+      "id": "ecomode_freeway",
+      "title": {
+        "en": "Set ecomode to ",
+        "no": "Sett økomodus til "
+      },
+      "titleFormatted": {
+        "en": "Set ecomode to [[ecomode]]",
+        "no": "Sett økomodus til [[ecomode]]"
+      },
+      "hint": {
+        "en": "Set ecomode to",
+        "no": "Sett økomodus til"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "ecomode",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "active",
+                "no": "aktiv"
+              }
+            },
+            {
+              "id": "0",
+              "label": {
+                "en": "inactive",
+                "no": "inaktiv"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heatingcoil_freeway",
+      "title": {
+        "en": "Set heatingcoil to",
+        "no": "Sett varmekolbe til"
+      },
+      "titleFormatted": {
+        "en": "Set heatingcoil to [[heatingcoil]]",
+        "no": "Sett varmekolbe til [[heatingcoil]]"
+      },
+      "hint": {
+        "en": "Set heatingcoil to",
+        "no": "Sett varmekolbe til"
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "heatingcoil",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "active",
+                "no": "aktiv"
+              }
+            },
+            {
+              "id": "0",
+              "label": {
+                "en": "inactive",
+                "no": "inaktiv"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "set-temperature_freeway",
+      "title": {
+        "en": "Set temperature",
+        "no": "Sett temperatur"
+      },
+      "titleFormatted": {
+        "en": "Set temperature to [[temperature]]",
+        "no": "Sett temperatur til [[temperature]]"
+      },
+      "hint": {
+        "en": "Set target temperature",
+        "no": "Sett måltemperatur"
+      },
+      "args": [
+        {
+          "type": "range",
+          "name": "temperature",
+          "min": 15,
+          "max": 22,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "id": "status-mode_freeway",
+      "title": {
+        "en": "Set mode to ",
+        "no": "Sett modus til "
+      },
+      "titleFormatted": {
+        "en": "Set mode to [[mode]]",
+        "no": "Sett modus til [[mode]]"
+      },
+      "hint": {
+        "en": "Set mode to",
+        "no": "Sett modus til "
+      },
+      "args": [
+        {
+          "type": "dropdown",
+          "name": "mode",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Home",
+                "no": "Hjemme"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Away",
+                "no": "Borte"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Fireplace",
+                "no": "Peismodus"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Boost",
+                "no": "Boost"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Off",
+                "no": "Av"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "id": "alarm_b_triggered_freeway",
+      "title": {
+        "en": "Filteralarm",
+        "no": "Filteralarm"
+      },
+      "titleFormatted": {
+        "en": "Filter alarm triggered",
+        "no": "Filteralarm utløst"
+      },
+      "hint": {
+        "en": "Filter needs replacement",
+        "no": "Filter må byttes"
+      },
+    "args": []
+    },
+    {
+      "id": "eWindstatus_mode_changed_freeway",
+      "title": {
+        "en": "Mode changed to",
+        "no": "Modus endret til"
+      },
+      "titleFormatted": {
+        "en": "Mode changed to [[mode_title]]",
+        "no": "Modus endret til [[mode_title]]"
+      },
+      "hint": {
+        "en": "Ventilation changed mode",
+        "no": "Ventilasjon endret status"
+      },
+      "args": [
+        {
+          "name": "mode_title",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Home",
+                "no": "Hjemme"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Away",
+                "no": "Borte"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Fireplace",
+                "no": "Peismodus"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Boost",
+                "no": "Boost"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Off",
+                "no": "Av"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heat_exchanger_mode_changed_freeway",
+      "title": {
+        "en": "Heat exchanger changed to",
+        "no": "Varmeveksler endret til"
+      },
+      "titleFormatted": {
+        "en": "Heat exchanger changed to [[mode_title]]",
+        "no": "Varmeveksler endret til [[mode_title]]"
+      },
+      "hint": {
+        "en": "Heat exchanger mode was changed",
+        "no": "Varmeveksler endret status"
+      },
+      "args": [
+        {
+          "name": "mode_title",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "On",
+                "no": "På"
+              }
+            },
+            {
+              "id": "0",
+              "label": {
+                "en": "Off",
+                "no": "Av"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heater_mode_changed_freeway",
+      "title": {
+        "en": "Heater changed to",
+        "no": "Varmeelement endret til"
+      },
+      "titleFormatted": {
+        "en": "Heater changed to [[mode_title]]",
+        "no": "Varmeelement endret til [[mode_title]]"
+      },
+      "hint": {
+        "en": "Heater mode was changed",
+        "no": "Varmeelement endret status"
+      },
+      "args": [
+        {
+          "name": "mode_title",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "On",
+                "no": "På"
+              }
+            },
+            {
+              "id": "0",
+              "label": {
+                "en": "Off",
+                "no": "Av"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "id": "eWindstatus_mode_is_freeway",
+      "title": {
+        "en": "eWind status mode is",
+        "no": "eWind modus er"
+      },
+      "titleFormatted": {
+        "en": "eWind status mode is [[mode]]",
+        "no": "eWind modus er [[mode]]"
+      },
+      "args": [
+        {
+          "name": "mode",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "0",
+              "label": {
+                "en": "Home",
+                "no": "Hjemme"
+              }
+            },
+            {
+              "id": "1",
+              "label": {
+                "en": "Away",
+                "no": "Borte"
+              }
+            },
+            {
+              "id": "2",
+              "label": {
+                "en": "Fireplace",
+                "no": "Peismodus"
+              }
+            },
+            {
+              "id": "3",
+              "label": {
+                "en": "Boost",
+                "no": "Boost"
+              }
+            },
+            {
+              "id": "4",
+              "label": {
+                "en": "Off",
+                "no": "Av"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heat_exchanger_mode_is_freeway",
+      "title": {
+        "en": "Heat exchanger mode is",
+        "no": "Varmeveksler er"
+      },
+      "titleFormatted": {
+        "en": "Heat exchanger mode is [[mode]]",
+        "no": "Varmeveksler er [[mode]]"
+      },
+      "args": [
+        {
+          "name": "mode",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "On",
+                "no": "På"
+              }
+            },
+            {
+              "id": "0",
+              "label": {
+                "en": "Off",
+                "no": "Av"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heater_mode_is_freeway",
+      "title": {
+        "en": "Heater mode is",
+        "no": "Varmeelement er"
+      },
+      "titleFormatted": {
+        "en": "Heating element is [[mode]]",
+        "no": "Varmeelement er [[mode]]"
+      },
+      "args": [
+        {
+          "name": "mode",
+          "type": "dropdown",
+          "values": [
+            {
+              "id": "1",
+              "label": {
+                "en": "On",
+                "no": "På"
+              }
+            },
+            {
+              "id": "0",
+              "label": {
+                "en": "Off",
+                "no": "Av"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

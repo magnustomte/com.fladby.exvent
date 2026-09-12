@@ -1,0 +1,198 @@
+{
+  "name": {
+    "en": "Freeway WEB"
+  },
+  "class": "other",
+  "capabilities": [
+    "efficiency.supplyEff",
+    "efficiency.extractEff",
+    "measure_temperature.outsideAir",
+    "measure_temperature.exhaustAir",
+    "measure_temperature.extractAir",
+    "measure_temperature.supplyAirHRC",
+    "ecomode_mode",
+    "measure_temperature.step",
+    "heater_mode",
+    "heat_exchanger_mode",
+    "target_temperature.step",
+    "alarm_b.desc",
+    "measure_humidity.extractAir",
+    "fanspeed_level",
+    "eWindstatus",
+    "eWindstatus_mode",
+    "lastPollTime",
+    "heating_coil_state"
+  ],
+  "capabilitiesOptions": {
+    "measure_temperature.exhaustAir": {
+      "title": {
+        "en": "Exhaust Air",
+        "no": "Utkast"
+      }
+    },
+    "measure_temperature.extractAir": {
+      "title": {
+        "en": "Extract Air temperature",
+        "no": "Avtrekk"
+      }
+    },
+    "measure_temperature.outsideAir": {
+      "title": {
+        "en": "Fresh Air",
+        "no": "Inntak"
+      }
+    },
+    "measure_temperature.supplyAirHRC": {
+      "title": {
+        "en": "Supply Air after Heat recovery",
+        "no": "Tilluft etter varmegjenvinning"
+      }
+    },
+    "measure_temperature.step": {
+      "title": {
+        "en": "Supply Air",
+        "no": "Tilluft"
+      }
+    },
+    "measure_humidity.extractAir": {
+      "title": {
+        "en": "Extract Air humidity",
+        "no": "Avtrekksfuktighet"
+      }
+    },
+    "efficiency.supplyEff": {
+      "title": {
+        "en": "Supply air efficiency",
+        "no": "Tilluftseffektivitet"
+      }
+    },
+    "efficiency.extractEff": {
+      "title": {
+        "en": "Exhaust Air efficiency",
+        "no": "Avtrekkseffektivitet"
+      }
+    },
+    "heater_mode": {
+      "title": {
+        "en": "Heating element",
+        "no": "Varmeelement"
+      }
+    },
+    "heat_exchanger_mode": {
+      "title": {
+        "en": "Heat exchanger",
+        "no": "Varmeveksler"
+      }
+    },
+    "heating_coil_state": {
+      "title": {
+        "en": "Heatingcoil",
+        "no": "Varmespole"
+      }
+    },
+    "alarm_b.desc": {
+      "title": {
+        "en": "Filteralarm",
+        "no": "Filteralarm"
+      }
+    },
+    "fanspeed_level": {
+      "title": {
+        "en": "Fan speed level",
+        "no": "Viftenivå"
+      }
+    },
+    "eWindstatus": {
+      "title": {
+        "en": "Status",
+        "no": "Status"
+      }
+    },
+    "eWindstatus_mode": {
+      "title": {
+        "en": "Mode",
+        "no": "Modus"
+      }
+    },
+    "ecomode_mode": {
+      "title": {
+        "en": "Ecomode",
+        "no": "Økomodus"
+      }
+    },
+    "target_temperature.step": {
+      "min": 15,
+      "max": 22,
+      "step": 1,
+      "title": {
+        "en": "Target temperature",
+        "no": "Ønsket temperatur"
+      }
+    },
+    "lastPollTime": {
+      "title": {
+        "en": "Last poll time",
+        "no": "Siste polling"
+      }
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "{{driverAssetsPath}}/images/small.jpg",
+    "large": "{{driverAssetsPath}}/images/large.jpg"
+  },
+  "pair": [
+    {
+      "id": "start"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Freeway WEB settings",
+        "no": "Freeway WEB-innstillinger"
+      },
+      "children": [
+        {
+          "id": "address",
+          "type": "text",
+          "value": "0.0.0.0",
+          "label": {
+            "en": "IP Address"
+          }
+        },
+        {
+          "id": "port",
+          "type": "number",
+          "value": 502,
+          "step": 1,
+          "label": {
+            "en": "Port"
+          }
+        },
+        {
+          "id": "unitId",
+          "type": "number",
+          "value": 1,
+          "min": 1,
+          "max": 255,
+          "step": 1,
+          "label": {
+            "en": "Modbus slave ID",
+            "no": "Modbus slave-ID"
+          },
+          "hint": {
+            "en": "Freeway WEB presents the ventilation unit on slave ID 1. Only change this if your setup differs.",
+            "no": "Freeway WEB presenterer aggregatet på slave-ID 1. Endre kun hvis oppsettet ditt avviker."
+          }
+        }
+      ]
+    }
+  ]
+}
