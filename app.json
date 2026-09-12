@@ -1809,8 +1809,8 @@
           }
         },
         "target_temperature.step": {
-          "min": 15,
-          "max": 22,
+          "min": 10,
+          "max": 30,
           "step": 1,
           "title": {
             "en": "Target temperature",
@@ -2007,8 +2007,8 @@
           }
         },
         "target_temperature.step": {
-          "min": 15,
-          "max": 22,
+          "min": 10,
+          "max": 30,
           "step": 1,
           "title": {
             "en": "Target temperature",
