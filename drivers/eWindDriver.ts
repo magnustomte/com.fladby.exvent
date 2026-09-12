@@ -4,6 +4,8 @@ import Homey from 'homey';
 export interface DriverFeatures {
     /** Eco mode, coil 40. Exists on MD automation; the coil is reserved on EDA. */
     ecoMode: boolean;
+    /** Overpressure duration as a device setting, holding register 57. */
+    overpressureTiming: boolean;
 }
 
 /**
@@ -22,6 +24,7 @@ export class EWindDriver extends Homey.Driver {
     get features(): DriverFeatures {
         return {
             ecoMode: true,
+            overpressureTiming: false,
         };
     }
 

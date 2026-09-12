@@ -9,6 +9,7 @@ class MyFreewayWebDriver extends EWindDriver {
         return {
             ...super.features,
             ecoMode: false,
+            overpressureTiming: true,
         };
     }
 

@@ -186,6 +186,34 @@
           }
         }
       ]
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "Ventilation unit",
+        "no": "Ventilasjonsaggregat"
+      },
+      "children": [
+        {
+          "id": "overpressure_duration",
+          "type": "number",
+          "value": 10,
+          "min": 1,
+          "max": 60,
+          "step": 1,
+          "units": {
+            "en": "min"
+          },
+          "label": {
+            "en": "Overpressure duration",
+            "no": "Varighet for overtrykk"
+          },
+          "hint": {
+            "en": "How long overpressure (fireplace mode) runs before the unit returns to normal. Stored on the unit, and also changed if you set it on the unit's panel.",
+            "no": "Hvor lenge overtrykk (peismodus) varer før aggregatet går tilbake til normal drift. Lagres på aggregatet, og endres også hvis du setter den på panelet."
+          }
+        }
+      ]
     }
   ]
 }

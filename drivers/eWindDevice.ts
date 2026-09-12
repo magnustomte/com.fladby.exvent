@@ -3,6 +3,7 @@ import * as Modbus from 'jsmodbus';
 import { eWind } from './eWind';
 import { checkRegister } from './response';
 import { checkCoils } from './response_coil';
+import type { DriverFeatures } from './eWindDriver';
 
 const RETRY_INTERVAL = 60 * 1000;
 const CONNECTION_RETRY_MIN = 5000;
@@ -11,6 +12,23 @@ const WAIT_FOR_CONNECT_TIMEOUT = 10000;
 const SOCKET_IDLE_TIMEOUT = 0;
 
 const activeDevices = new Set<EWindDevice>();
+
+/** Unit configuration exposed as a device setting. */
+interface UnitSetting {
+    kind: 'holding' | 'coil';
+    address: number;
+    /** Register value per unit of the setting, e.g. 10 for tenths of a degree. */
+    scale?: number;
+    /** The driver feature that enables the setting. */
+    feature: keyof DriverFeatures;
+}
+
+/** Keyed by device setting id. The values live on the unit, not in Homey. */
+const UNIT_SETTINGS: Record<string, UnitSetting> = {
+    overpressure_duration: { kind: 'holding', address: 57, feature: 'overpressureTiming' },
+};
+
+const CONNECTION_SETTINGS = ['address', 'port', 'unitId'];
 
 /** Turns a jsmodbus rejection into a reason a user can act on. */
 const describeModbusError = (err: any): string => {
@@ -294,6 +312,7 @@ export class EWindDevice extends eWind {
             await this.processResult({ ...checkRegisterRes });
             const checkCoilsRes = await checkCoils(this.coilsToPoll(), this.client);
             await this.processResult({ ...checkCoilsRes });
+            await this.syncUnitSettings();
             if (this.isActive) {
                 try {
                     await this.setCapabilityValue(
@@ -371,6 +390,51 @@ export class EWindDevice extends eWind {
         if (this.isActive) {
             await this.setCapabilityValue('eWindstatus_mode', value);
         }
+    }
+
+    private unitSettings(): [string, UnitSetting][] {
+        return Object.entries(UNIT_SETTINGS).filter(([, setting]) => this.driver.features[setting.feature]);
+    }
+
+    /**
+     * Copies unit configuration into the device settings, so a change made on
+     * the unit's own panel shows up in Homey. setSettings does not call
+     * onSettings, so this never writes back to the unit.
+     */
+    private async syncUnitSettings() {
+        const settings = this.getSettings();
+        const changed: Record<string, number | boolean> = {};
+        try {
+            for (const [key, setting] of this.unitSettings()) {
+                const value = await this.readUnitSetting(setting);
+                if (settings[key] !== value) changed[key] = value;
+            }
+            if (Object.keys(changed).length > 0) {
+                await this.setSettings(changed);
+            }
+        } catch (err) {
+            this.error(`Reading unit settings failed: ${describeModbusError(err)}`);
+        }
+    }
+
+    private async readUnitSetting(setting: UnitSetting): Promise<number | boolean> {
+        if (setting.kind === 'coil') {
+            const res = await this.client.readCoils(setting.address, 1);
+            return Boolean(res.response.body.valuesAsArray[0]);
+        }
+        const res = await this.client.readHoldingRegisters(setting.address, 1);
+        const raw = res.response.body.valuesAsBuffer.readInt16BE(0);
+        return raw / (setting.scale ?? 1);
+    }
+
+    private async writeUnitSetting(setting: UnitSetting, value: number | boolean) {
+        if (setting.kind === 'coil') {
+            await this.sendCoilRequest(setting.address, Boolean(value));
+            return;
+        }
+        // Registers are 16-bit; negative values go out as two's complement
+        const raw = Math.round(Number(value) * (setting.scale ?? 1)) & 0xffff;
+        await this.sendHoldingRequest(setting.address, raw);
     }
 
     async sendHoldingRequest(register: number, value: number) {
@@ -569,8 +633,8 @@ export class EWindDevice extends eWind {
         }, 10000);
     }
     
-    async onSettings({ newSettings }: { newSettings: Record<string, any>; changedKeys: string[] }) {
-        if (newSettings && (newSettings.address || newSettings.port || newSettings.unitId)) {
+    async onSettings({ newSettings, changedKeys }: { newSettings: Record<string, any>; changedKeys: string[] }) {
+        if (changedKeys.some(key => CONNECTION_SETTINGS.includes(key))) {
             try {
                 this.modbusOptions.host = newSettings.address;
                 this.modbusOptions.port = newSettings.port;
@@ -586,6 +650,13 @@ export class EWindDevice extends eWind {
                 if (this.isActive) {
                     await this.setCapabilityValue('lastPollTime', 'No connection');
                 }
+            }
+        }
+
+        // A failed write throws, and Homey then refuses to save the settings
+        for (const [key, setting] of this.unitSettings()) {
+            if (changedKeys.includes(key)) {
+                await this.writeUnitSetting(setting, newSettings[key]);
             }
         }
     }
