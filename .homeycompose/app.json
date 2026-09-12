@@ -1,6 +1,6 @@
 {
   "id": "com.fladby.exvent",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "brandColor": "#88B943",
@@ -14,8 +14,8 @@
     "no": "Exvent"
   },
   "description": {
-    "en": "Smart ventilation control for Exvent eWind & eAir, fully Homey-integrated.",
-    "no": "Forbedre innendørsklima med ventilasjonsanlegget"
+    "en": "Monitor and control Exvent and Enervent ventilation units from Homey.",
+    "no": "Overvåk og styr ventilasjonsaggregater fra Exvent og Enervent med Homey."
   },
   "category": [
     "climate"
@@ -34,8 +34,24 @@
   },
   "tags": {
     "en": [
-      "Ventilasjon",
-      ""
+      "ventilation",
+      "heat recovery",
+      "heat pump",
+      "Exvent",
+      "Enervent",
+      "eWind",
+      "eAir",
+      "Freeway WEB"
+    ],
+    "no": [
+      "ventilasjon",
+      "varmegjenvinning",
+      "varmepumpe",
+      "Exvent",
+      "Enervent",
+      "eWind",
+      "eAir",
+      "Freeway WEB"
     ]
   }
 }

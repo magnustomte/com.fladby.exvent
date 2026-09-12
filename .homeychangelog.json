@@ -214,5 +214,9 @@
   },
   "4.0.1": {
     "en": "Bugfix for LastPollTime capability and reconnect logic. Updated Tagline and description of the app."
+  },
+  "4.1.0": {
+    "en": "Adds Enervent Freeway WEB, with settings and Flow cards for overpressure duration, season control and the heat pump. You now name a device when pairing it. Fixes Flow cards acting on the wrong device, triggers that never fired, mode and status readings, changes that failed without an error, and the target temperature range. The app is also much smaller.",
+    "no": "Legger til Enervent Freeway WEB, med innstillinger og Flytkort for varighet på overtrykk, sesongstyring og varmepumpe. Du gir nå enheten et navn når du legger den til. Retter Flytkort som styrte feil enhet, triggere som aldri ble utløst, avlesning av modus og status, endringer som feilet uten feilmelding, og området for ønsket temperatur. Appen er også mye mindre."
   }
 }

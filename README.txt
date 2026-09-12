@@ -1,7 +1,12 @@
-Control and monitor your Exvent eWind and eAir units directly from Homey. This app reads temperatures, humidity, fan speed, efficiency, heater and heat-exchanger states, and exposes modes and actions to Flows. Automate eco mode, heater coil, status modes, and target temperature, and keep an eye on live poll status so you always know your ventilation is connected.
-Remember to activate Modbus TCP in the eWind app before trying to connect and to give it a static IP in your router.
+Control and monitor your Exvent and Enervent ventilation unit from Homey. The app reads temperatures, humidity, fan level, heat recovery efficiency and whether the unit is heating, cooling or recovering heat, and lets you set the mode and target temperature from Flows.
 
 Supported devices
-Following devices are supported
-- Exvent eWind systems
-- Exvent eAir systems
+- Exvent eWind
+- Exvent eAir
+- Enervent units with EDA automation, through a Freeway WEB bus adapter
+
+Before adding an eWind or eAir, turn on Modbus TCP in the Exvent app.
+
+Before adding a Freeway WEB, open the Freeway web interface, enter your Homey's IP address as the Modbus/TCP client under Access control configuration, and save. The adapter accepts Modbus connections from that one address only.
+
+Give the unit or adapter a fixed IP address in your router, and give Homey one too when using Freeway WEB.
