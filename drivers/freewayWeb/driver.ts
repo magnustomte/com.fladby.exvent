@@ -10,6 +10,7 @@ class MyFreewayWebDriver extends EWindDriver {
             ...super.features,
             ecoMode: false,
             overpressureTiming: true,
+            seasonControl: true,
         };
     }
 

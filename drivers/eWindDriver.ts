@@ -6,6 +6,11 @@ export interface DriverFeatures {
     ecoMode: boolean;
     /** Overpressure duration as a device setting, holding register 57. */
     overpressureTiming: boolean;
+    /**
+     * Heating and cooling allowed (coils 54 and 52) and the outdoor temperatures
+     * that block them (holding registers 196 and 164), as device settings.
+     */
+    seasonControl: boolean;
 }
 
 /**
@@ -25,6 +30,7 @@ export class EWindDriver extends Homey.Driver {
         return {
             ecoMode: true,
             overpressureTiming: false,
+            seasonControl: false,
         };
     }
 

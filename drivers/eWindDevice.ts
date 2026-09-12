@@ -26,6 +26,10 @@ interface UnitSetting {
 /** Keyed by device setting id. The values live on the unit, not in Homey. */
 const UNIT_SETTINGS: Record<string, UnitSetting> = {
     overpressure_duration: { kind: 'holding', address: 57, feature: 'overpressureTiming' },
+    heating_allowed: { kind: 'coil', address: 54, feature: 'seasonControl' },
+    cooling_allowed: { kind: 'coil', address: 52, feature: 'seasonControl' },
+    heating_block_temperature: { kind: 'holding', address: 196, scale: 10, feature: 'seasonControl' },
+    cooling_block_temperature: { kind: 'holding', address: 164, scale: 10, feature: 'seasonControl' },
 };
 
 const CONNECTION_SETTINGS = ['address', 'port', 'unitId'];
@@ -403,17 +407,15 @@ export class EWindDevice extends eWind {
      */
     private async syncUnitSettings() {
         const settings = this.getSettings();
-        const changed: Record<string, number | boolean> = {};
-        try {
-            for (const [key, setting] of this.unitSettings()) {
+        for (const [key, setting] of this.unitSettings()) {
+            try {
                 const value = await this.readUnitSetting(setting);
-                if (settings[key] !== value) changed[key] = value;
+                if (settings[key] !== value) {
+                    await this.setSettings({ [key]: value });
+                }
+            } catch (err) {
+                this.error(`Syncing setting ${key} from the unit failed: ${describeModbusError(err)}`);
             }
-            if (Object.keys(changed).length > 0) {
-                await this.setSettings(changed);
-            }
-        } catch (err) {
-            this.error(`Reading unit settings failed: ${describeModbusError(err)}`);
         }
     }
 
