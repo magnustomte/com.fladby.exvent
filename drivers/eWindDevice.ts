@@ -52,11 +52,6 @@ export class EWindDevice extends eWind {
         return 'eWind';
     }
 
-    /** Suffix distinguishing this driver's flow cards from the other drivers'. */
-    protected get flowSuffix(): string {
-        return '';
-    }
-
     /**
      * Whether writes must use the "multiple" function codes (15 and 16) instead
      * of the single ones (5 and 6).
@@ -82,7 +77,6 @@ export class EWindDevice extends eWind {
 
     private intervalId: NodeJS.Timeout | null = null;
     private connectionRetryId: NodeJS.Timeout | null = null;
-    private flowListenersRegistered: boolean = false;
     private capabilityListenersRegistered: boolean = false;
     private pollingInProgress: boolean = false;
     private isActive: boolean = true;
@@ -107,7 +101,7 @@ export class EWindDevice extends eWind {
      * Guard against acting on stale/deleted devices; Homey returns 404 when a
      * flow or capability change targets a missing device entry.
      */
-    private isUsable(): boolean {
+    isUsable(): boolean {
         return this.isActive && this.getAvailable();
     }
 
@@ -134,7 +128,6 @@ export class EWindDevice extends eWind {
         this.isActive = true;
         this.connectSocket();
         this.setCapabilities();
-        this.registerFlowListeners();
         this.registerCapabilityListeners();
 
         await this.poll_eWind();
@@ -491,64 +484,14 @@ export class EWindDevice extends eWind {
         }
     }
     
-    registerFlowListeners() {
-        if (this.flowListenersRegistered) return;
-    
-        const ecomodeCard = this.homey.flow.getActionCard(`ecomode${this.flowSuffix}`);
-        ecomodeCard.registerRunListener(async (args: any) => {
-            if (!this.isUsable()) return false;
-            await args.device.setMode('ecomode_mode', args.ecomode);
-            await this.sendCoilRequest(40, args.ecomode === '1');
-        });
-    
-        const HeatingCoilCard = this.homey.flow.getActionCard(`heatingcoil${this.flowSuffix}`);
-        HeatingCoilCard.registerRunListener(async (args: any) => {
-            if (!this.isUsable()) return false;
-            await args.device.setMode('heating_coil_state', args.heatingcoil);
-            await this.sendCoilRequest(54, args.heatingcoil === '1');
-        });
-    
-        const eWindStatusCard = this.homey.flow.getActionCard(`status-mode${this.flowSuffix}`);
-        eWindStatusCard.registerRunListener(async (args: any) => {
-            if (!this.isUsable()) return false;
-            await args.device.setMode('eWindstatus_mode', args.mode);
-            await this.setEWindValue(args.mode);
-        });
-    
-        const SetTemperatureCard = this.homey.flow.getActionCard(`set-temperature${this.flowSuffix}`);
-        SetTemperatureCard.registerRunListener(async (args: any) => {
-            if (!this.isUsable()) return false;
-            await this.setCapabilityValue('target_temperature.step', args.temperature);
-            await this.sendHoldingRequest(135, args.temperature * 10);
-        });
-    
-        this.flowListenersRegistered = true;
-    }
-    
     registerCapabilityListeners() {
         if (this.capabilityListenersRegistered) return;
-    
-        this.homey.flow.getConditionCard(`eWindstatus_mode_is${this.flowSuffix}`)
-            .registerRunListener(async (args: any) => {
-                return this.getCapabilityValue('eWindstatus_mode') === args.mode;
-            });
-    
-        this.homey.flow.getConditionCard(`heat_exchanger_mode_is${this.flowSuffix}`)
-            .registerRunListener(async (args: any) => {
-                return this.getCapabilityValue('heat_exchanger_mode') === args.mode;
-            });
-    
-        this.homey.flow.getConditionCard(`heater_mode_is${this.flowSuffix}`)
-            .registerRunListener(async (args: any) => {
-                return this.getCapabilityValue('heater_mode') === args.mode;
-            });
     
         this.registerCapabilityListener('eWindstatus_mode', async (value) => {
             if (!this.isUsable()) return;
             await this.setEWindValue(value);
-            await this.homey.flow.getDeviceTriggerCard(`eWindstatus_mode_changed${this.flowSuffix}`)
-                .trigger(this)
-                .catch(this.error);
+            await this.driver.triggerFlow(this, 'eWindstatus_mode_changed', { mode: value })
+                .catch((err: unknown) => this.error(err));
         });
     
         this.registerCapabilityListener('target_temperature.step', async (value) => {
@@ -563,24 +506,21 @@ export class EWindDevice extends eWind {
     
         this.registerCapabilityListener('heat_exchanger_mode', async (value) => {
             if (!this.isUsable()) return;
-            await this.homey.flow.getDeviceTriggerCard(`heat_exchanger_mode_changed${this.flowSuffix}`)
-                .trigger(this)
-                .catch(this.error);
+            await this.driver.triggerFlow(this, 'heat_exchanger_mode_changed', { mode: value })
+                .catch((err: unknown) => this.error(err));
         });
     
         this.registerCapabilityListener('heater_mode', async (value) => {
             if (!this.isUsable()) return;
-            await this.homey.flow.getDeviceTriggerCard(`heater_mode_changed${this.flowSuffix}`)
-                .trigger(this)
-                .catch(this.error);
+            await this.driver.triggerFlow(this, 'heater_mode_changed', { mode: value })
+                .catch((err: unknown) => this.error(err));
         });
     
         this.registerCapabilityListener('alarm_b', async (value) => {
             if (!this.isUsable()) return;
             if (value) {
-                await this.homey.flow.getDeviceTriggerCard(`alarm_b_triggered${this.flowSuffix}`)
-                    .trigger(this)
-                    .catch(this.error);
+                await this.driver.triggerFlow(this, 'alarm_b_triggered', {})
+                    .catch((err: unknown) => this.error(err));
             }
         });
     
@@ -621,7 +561,6 @@ export class EWindDevice extends eWind {
             this.connectionRetryId = null;
         }
         this.connectingPromise = null;
-        this.flowListenersRegistered = false;
         this.capabilityListenersRegistered = false;
         this.teardownSocket();
     }

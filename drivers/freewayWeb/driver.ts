@@ -1,23 +1,14 @@
-import Homey from 'homey';
+import { EWindDriver } from '../eWindDriver';
 
-class MyFreewayWebDriver extends Homey.Driver {
+class MyFreewayWebDriver extends EWindDriver {
+    protected get flowSuffix(): string {
+        return '_freeway';
+    }
 
-  /**
-   * onInit is called when the driver is initialized.
-   */
-  async onInit() {
-    this.log('MyFreewayWebDriver has been initialized');
-  }
-
-  /**
-   * onPairListDevices is called when a user is adding a device and the 'list_devices' view is called.
-   * This should return an array with the data of devices that are available for pairing.
-   */
-  async onPairListDevices() {
-    return [
-    ];
-  }
-  
+    async onInit() {
+        await super.onInit();
+        this.log('MyFreewayWebDriver has been initialized');
+    }
 }
 
 module.exports = MyFreewayWebDriver;

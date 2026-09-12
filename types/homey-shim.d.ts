@@ -8,6 +8,7 @@ declare namespace Homey {
     }
 
     class Driver {
+        homey: any;
         log(...args: any[]): void;
         error(...args: any[]): void;
         onInit(): Promise<void> | void;
@@ -15,6 +16,7 @@ declare namespace Homey {
 
     class Device {
         homey: any;
+        driver: any;
         log(...args: any[]): void;
         error(...args: any[]): void;
         getAvailable(): boolean;

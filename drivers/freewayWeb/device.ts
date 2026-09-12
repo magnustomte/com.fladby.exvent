@@ -6,8 +6,8 @@ import { EWindDevice } from '../eWindDevice';
  * presents it on slave ID 1.
  *
  * EDA and the MD automation used by eWind share the register addresses this
- * app reads, so the behaviour is inherited unchanged; only the slave ID and the
- * flow card ids differ.
+ * app reads, so the behaviour is inherited; only the slave ID and the Modbus
+ * function codes used for writing differ.
  */
 class FreewayWebDevice extends EWindDevice {
     protected get defaultUnitId(): number {
@@ -16,10 +16,6 @@ class FreewayWebDevice extends EWindDevice {
 
     protected get logLabel(): string {
         return 'freewayWeb';
-    }
-
-    protected get flowSuffix(): string {
-        return '_freeway';
     }
 
     // Freeway WEB acknowledges function codes 5 and 6 but never passes the
