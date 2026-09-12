@@ -484,6 +484,25 @@ export class EWindDevice extends eWind {
         }
     }
     
+    protected async onCapabilityChanged(capabilityId: string, value: any) {
+        const trigger = (card: string, state: Record<string, unknown> = {}) => this.driver
+            .triggerFlow(this, card, state)
+            .catch((err: unknown) => this.error(err));
+
+        switch (capabilityId) {
+            case 'eWindstatus_mode':
+            case 'heat_exchanger_mode':
+            case 'heater_mode':
+                await trigger(`${capabilityId}_changed`, { mode: value });
+                break;
+            case 'alarm_b.desc':
+                if (value === true) await trigger('alarm_b_triggered');
+                break;
+            default:
+                break;
+        }
+    }
+
     registerCapabilityListeners() {
         if (this.capabilityListenersRegistered) return;
     
@@ -502,26 +521,6 @@ export class EWindDevice extends eWind {
         this.registerCapabilityListener('ecomode_mode', async (value) => {
             if (!this.isUsable()) return;
             await this.sendCoilRequest(40, value === '1');
-        });
-    
-        this.registerCapabilityListener('heat_exchanger_mode', async (value) => {
-            if (!this.isUsable()) return;
-            await this.driver.triggerFlow(this, 'heat_exchanger_mode_changed', { mode: value })
-                .catch((err: unknown) => this.error(err));
-        });
-    
-        this.registerCapabilityListener('heater_mode', async (value) => {
-            if (!this.isUsable()) return;
-            await this.driver.triggerFlow(this, 'heater_mode_changed', { mode: value })
-                .catch((err: unknown) => this.error(err));
-        });
-    
-        this.registerCapabilityListener('alarm_b', async (value) => {
-            if (!this.isUsable()) return;
-            if (value) {
-                await this.driver.triggerFlow(this, 'alarm_b_triggered', {})
-                    .catch((err: unknown) => this.error(err));
-            }
         });
     
         this.registerCapabilityListener('heating_coil_state', async (value) => {

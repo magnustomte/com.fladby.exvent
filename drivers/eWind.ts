@@ -30,11 +30,23 @@ export class eWind extends Homey.Device {
         "heating_coil": [54, 1, 'UINT32', "State of Heater coil On/Off"], 
     };
 
+    /**
+     * Called after a poll changes a capability's value. The unit also changes
+     * state on its own and from its control panel, which capability listeners
+     * never see, so this is where Flow triggers belong.
+     */
+    protected async onCapabilityChanged(capabilityId: string, value: any): Promise<void> {}
+
     private async setIfChanged(capabilityId: string, value: any) {
         try {
             const current = this.getCapabilityValue(capabilityId);
             if (current === value) return;
             await this.setCapabilityValue(capabilityId, value);
+            // No previous value means the device was just added or the app just
+            // started; that is not a change worth triggering Flows for.
+            if (current !== null && current !== undefined) {
+                await this.onCapabilityChanged(capabilityId, value);
+            }
         } catch (_) {
             // Ignore capability errors (e.g., device deleted)
         }
