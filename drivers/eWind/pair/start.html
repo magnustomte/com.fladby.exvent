@@ -1,47 +1,39 @@
 <script type="text/javascript">
 
-Homey.setTitle( __('pair.title') );
+Homey.setTitle( __('pair.ewind.title') );
 
 $(function() {
-	$('#connect').click(function() {
+  $('#name').val( __('pair.default_name') );
+
+  $('#connect').click(function() {
     $('.eWind-error').hide();
 
-    var inputaddress = $('#address').val();
+    var inputname = $('#name').val().trim();
+    var inputaddress = $('#address').val().trim();
     var inputport = Number($('#port').val());
 
-    var deviceId = Math.random().toString(36).substr(2,5).toLowerCase();
-    var id = Math.round(Math.random() * (100000 - 10000) + 10000);
-
-    if (inputaddress != '' && inputport != '') {
-      var device_data = {
-        id:  deviceId
-      };
-
-      var settings = {
-        address : inputaddress,
-        port    : inputport,
-      };
-
-      Homey.addDevice({
-        name   : 'exvent_' + deviceId,
-        data 	 : device_data,
-        settings : settings
-      }, function(error, result) {
-        if (error) {
-            $('.eWind-error').show();
-            $('.eWind-error-msg').html(error.message || error.toString() );
-        }
-        $('.eWind-error').hide();
-
-        Homey.done();
-      })
-
-    } else {
-        $('.eWind-error').show();
-        $('.eWind-error-msg').html( __('pair.nosettings') );
+    if (inputname === '' || inputaddress === '' || !inputport) {
+      $('.eWind-error-msg').html( __('pair.nosettings') );
+      $('.eWind-error').show();
+      return;
     }
 
-	});
+    // Only needs to be unique; the name is what the user sees
+    var deviceId = Math.random().toString(36).substr(2, 5).toLowerCase();
+
+    Homey.addDevice({
+      name     : inputname,
+      data     : { id: deviceId },
+      settings : { address: inputaddress, port: inputport },
+    }, function(error, result) {
+      if (error) {
+        $('.eWind-error-msg').html(error.message || error.toString());
+        $('.eWind-error').show();
+        return;
+      }
+      Homey.done();
+    });
+  });
 })
 </script>
 
@@ -77,8 +69,12 @@ $(function() {
   }
 </style>
 
-<p data-i18n="pair.intro">Enter the IP address and port of your eWind ModbusUnit. </p>
+<p data-i18n="pair.ewind.intro"></p>
 <div class="eWind-pairing">
+  <div class="form-group">
+    <label for="name" data-i18n="pair.name">Name</label>
+    <input type="text" class="form-control" id="name" required>
+  </div>
   <div class="form-group">
     <label for="address" data-i18n="pair.address">IP address</label>
     <input type="text" class="form-control" id="address" placeholder="0.0.0.0" required>

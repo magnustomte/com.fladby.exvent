@@ -1,16 +1,23 @@
 {
   "pair": {
-    "title": "Add eWind ventilation system",
-    "nosettings": "Please fill in all the required fields.",
-    "intro": "Enter the IP address and port of your eWind Wifi-dongle and ensure you have set Modbus TCP to ON in the app.",
-    "address": "IP Address",
-    "port": "Port",
-    "deviceid": "Device ID",
-    "connect": "Connect",
+    "ewind": {
+      "title": "Add eWind ventilation unit",
+      "intro": "Enter the IP address and port of your eWind Wi-Fi adapter, and make sure Modbus TCP is turned on in the Exvent app."
+    },
+    "eair": {
+      "title": "Add eAir ventilation unit",
+      "intro": "Enter the IP address and port of your eAir unit, and make sure Modbus TCP is turned on in the Exvent app."
+    },
     "freeway": {
-      "title": "Add Freeway WEB ventilation system",
+      "title": "Add Freeway WEB ventilation unit",
       "intro": "Enter the IP address and port of your Freeway WEB adapter. First enable Modbus/TCP in the Freeway's own web interface: Configuration → Access control configuration, put your Homey's IP address in “IP address of Modbus/TCP client” and click Save Modbus/TCP. Until you do, the adapter refuses connections on port 502."
-    }
+    },
+    "name": "Name",
+    "default_name": "Ventilation",
+    "address": "IP address",
+    "port": "Port",
+    "connect": "Connect",
+    "nosettings": "Please fill in all fields."
   },
   "Unreachable": "Unreachable",
   "Off": "Off",

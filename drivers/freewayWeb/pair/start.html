@@ -3,45 +3,37 @@
 Homey.setTitle( __('pair.freeway.title') );
 
 $(function() {
-	$('#connect').click(function() {
+  $('#name').val( __('pair.default_name') );
+
+  $('#connect').click(function() {
     $('.freewayWeb-error').hide();
 
-    var inputaddress = $('#address').val();
+    var inputname = $('#name').val().trim();
+    var inputaddress = $('#address').val().trim();
     var inputport = Number($('#port').val());
 
-    var deviceId = Math.random().toString(36).substr(2,5).toLowerCase();
-    var id = Math.round(Math.random() * (100000 - 10000) + 10000);
-
-    if (inputaddress != '' && inputport != '') {
-      var device_data = {
-        id:  deviceId
-      };
-
-      var settings = {
-        address : inputaddress,
-        port    : inputport,
-      };
-
-      Homey.addDevice({
-        name   : 'exvent_' + deviceId,
-        data 	 : device_data,
-        settings : settings
-      }, function(error, result) {
-        if (error) {
-            $('.freewayWeb-error').show();
-            $('.freewayWeb-error-msg').html(error.message || error.toString() );
-        }
-        $('.freewayWeb-error').hide();
-
-        Homey.done();
-      })
-
-    } else {
-        $('.freewayWeb-error').show();
-        $('.freewayWeb-error-msg').html( __('pair.nosettings') );
+    if (inputname === '' || inputaddress === '' || !inputport) {
+      $('.freewayWeb-error-msg').html( __('pair.nosettings') );
+      $('.freewayWeb-error').show();
+      return;
     }
 
-	});
+    // Only needs to be unique; the name is what the user sees
+    var deviceId = Math.random().toString(36).substr(2, 5).toLowerCase();
+
+    Homey.addDevice({
+      name     : inputname,
+      data     : { id: deviceId },
+      settings : { address: inputaddress, port: inputport },
+    }, function(error, result) {
+      if (error) {
+        $('.freewayWeb-error-msg').html(error.message || error.toString());
+        $('.freewayWeb-error').show();
+        return;
+      }
+      Homey.done();
+    });
+  });
 })
 </script>
 
@@ -77,8 +69,12 @@ $(function() {
   }
 </style>
 
-<p data-i18n="pair.freeway.intro">Enter the IP address and port of your Freeway WEB adapter. Enable Modbus/TCP in the Freeway web interface first, with your Homey's IP address as the Modbus/TCP client.</p>
+<p data-i18n="pair.freeway.intro"></p>
 <div class="freewayWeb-pairing">
+  <div class="form-group">
+    <label for="name" data-i18n="pair.name">Name</label>
+    <input type="text" class="form-control" id="name" required>
+  </div>
   <div class="form-group">
     <label for="address" data-i18n="pair.address">IP address</label>
     <input type="text" class="form-control" id="address" placeholder="0.0.0.0" required>
