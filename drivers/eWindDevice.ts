@@ -12,6 +12,15 @@ const SOCKET_IDLE_TIMEOUT = 0;
 
 const activeDevices = new Set<EWindDevice>();
 
+/** Turns a jsmodbus rejection into a reason a user can act on. */
+const describeModbusError = (err: any): string => {
+    const body = err?.response?.body;
+    if (body?.isException) {
+        return `Modbus exception ${body.code} (${body.message})`;
+    }
+    return err?.message ?? String(err);
+};
+
 const shutdown = () => {
     for (const device of activeDevices) {
         device.cleanup();
@@ -372,11 +381,25 @@ export class EWindDevice extends eWind {
         });
     }
     
+    /**
+     * Writes a holding register and waits for the unit to confirm it.
+     *
+     * Failures are rethrown so the capability listener or flow card that asked
+     * for the change reports them, instead of the change silently reverting at
+     * the next poll.
+     */
     async sendHoldingRequest(register: number, value: number) {
-        this.scheduleAction(async () => {
+        try {
             await this.ensureConnected();
+            if (!this.client) {
+                throw new Error('no connection to the ventilation unit');
+            }
             await this.client.writeSingleRegister(register, value);
-        });
+        } catch (err) {
+            const reason = describeModbusError(err);
+            this.error(`Writing ${value} to holding register ${register} failed: ${reason}`);
+            throw new Error(`The ventilation unit did not accept the change: ${reason}`);
+        }
     }
     
     async sendCoilRequest(register: number, value: boolean) {
