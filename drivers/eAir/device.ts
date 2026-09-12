@@ -32,7 +32,7 @@ class MyeAirDevice extends eAir {
     modbusOptions = {
         host: this.getSetting('address'),
         port: this.getSetting('port'),
-        unitId: this.getSetting('id') || 255,
+        unitId: this.getSetting('unitId') || 255,
         timeout: 5000, // 5000 ms timeout
         autoReconnect: true,
         logLabel: 'eAir',
@@ -560,10 +560,11 @@ class MyeAirDevice extends eAir {
     }
     
     async onSettings({ newSettings }: { newSettings: Record<string, any>; changedKeys: string[] }) {
-        if (newSettings && (newSettings.address || newSettings.port)) {
+        if (newSettings && (newSettings.address || newSettings.port || newSettings.unitId)) {
             try {
                 this.modbusOptions.host = newSettings.address;
                 this.modbusOptions.port = newSettings.port;
+                this.modbusOptions.unitId = newSettings.unitId || 255;
                 this.teardownSocket();
                 this.connectionRetryDelay = CONNECTION_RETRY_MIN;
                 await this.delay(1000);

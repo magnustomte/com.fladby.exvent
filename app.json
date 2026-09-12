@@ -1184,6 +1184,22 @@
               "label": {
                 "en": "Port"
               }
+            },
+            {
+              "id": "unitId",
+              "type": "number",
+              "value": 255,
+              "min": 1,
+              "max": 255,
+              "step": 1,
+              "label": {
+                "en": "Modbus slave ID",
+                "no": "Modbus slave-ID"
+              },
+              "hint": {
+                "en": "Modbus unit ID of the ventilation unit. Leave at 255 unless your gateway requires a specific address.",
+                "no": "Modbus enhets-ID for aggregatet. La stå på 255 med mindre gatewayen krever en bestemt adresse."
+              }
             }
           ]
         }
@@ -1365,6 +1381,22 @@
               "step": 1,
               "label": {
                 "en": "Port"
+              }
+            },
+            {
+              "id": "unitId",
+              "type": "number",
+              "value": 255,
+              "min": 1,
+              "max": 255,
+              "step": 1,
+              "label": {
+                "en": "Modbus slave ID",
+                "no": "Modbus slave-ID"
+              },
+              "hint": {
+                "en": "Modbus unit ID of the ventilation unit. Leave at 255 unless your gateway requires a specific address.",
+                "no": "Modbus enhets-ID for aggregatet. La stå på 255 med mindre gatewayen krever en bestemt adresse."
               }
             }
           ]
