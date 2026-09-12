@@ -21,6 +21,12 @@ class FreewayWebDevice extends EWindDevice {
     protected get flowSuffix(): string {
         return '_freeway';
     }
+
+    // Freeway WEB acknowledges function codes 5 and 6 but never passes the
+    // write on to the unit. Codes 15 and 16 go through.
+    protected get useMultipleWrites(): boolean {
+        return true;
+    }
 }
 
 module.exports = FreewayWebDevice;

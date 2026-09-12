@@ -57,6 +57,14 @@ export class EWindDevice extends eWind {
         return '';
     }
 
+    /**
+     * Whether writes must use the "multiple" function codes (15 and 16) instead
+     * of the single ones (5 and 6).
+     */
+    protected get useMultipleWrites(): boolean {
+        return false;
+    }
+
     // Instance properties for socket and client
     socket: net.Socket | null = null;
     client: any = null;
@@ -394,7 +402,11 @@ export class EWindDevice extends eWind {
             if (!this.client) {
                 throw new Error('no connection to the ventilation unit');
             }
-            await this.client.writeSingleRegister(register, value);
+            if (this.useMultipleWrites) {
+                await this.client.writeMultipleRegisters(register, [value]);
+            } else {
+                await this.client.writeSingleRegister(register, value);
+            }
         } catch (err) {
             const reason = describeModbusError(err);
             this.error(`Writing ${value} to holding register ${register} failed: ${reason}`);
@@ -405,7 +417,11 @@ export class EWindDevice extends eWind {
     async sendCoilRequest(register: number, value: boolean) {
         this.scheduleAction(async () => {
             await this.ensureConnected();
-            await this.client.writeSingleCoil(register, value);
+            if (this.useMultipleWrites) {
+                await this.client.writeMultipleCoils(register, [value]);
+            } else {
+                await this.client.writeSingleCoil(register, value);
+            }
         });
     }
     
