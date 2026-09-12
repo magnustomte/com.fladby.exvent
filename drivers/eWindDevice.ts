@@ -292,7 +292,7 @@ export class EWindDevice extends eWind {
         try {
             const checkRegisterRes = await checkRegister(this.registers, this.client);
             await this.processResult({ ...checkRegisterRes });
-            const checkCoilsRes = await checkCoils(this.coilRegisters, this.client);
+            const checkCoilsRes = await checkCoils(this.coilsToPoll(), this.client);
             await this.processResult({ ...checkCoilsRes });
             if (this.isActive) {
                 try {
@@ -323,6 +323,12 @@ export class EWindDevice extends eWind {
             this.pollingInProgress = false;
             // device unavailable, skip capability update
         }
+    }
+
+    /** The coils to read each poll, leaving out eco mode where the unit lacks it. */
+    private coilsToPoll(): Object {
+        if (this.driver.supportsEcoMode) return this.coilRegisters;
+        return Object.fromEntries(Object.entries(this.coilRegisters).filter(([key]) => key !== 'eco_mode'));
     }
 
     async setEWindValue(value: string) {
@@ -432,8 +438,12 @@ export class EWindDevice extends eWind {
         if (this.hasCapability('measure_temperature.supplyAirHRC') === false) {
             await this.addCapability('measure_temperature.supplyAirHRC');
         }
-        if (this.hasCapability('ecomode_mode') === false) {
-            await this.addCapability('ecomode_mode');
+        if (this.driver.supportsEcoMode) {
+            if (this.hasCapability('ecomode_mode') === false) {
+                await this.addCapability('ecomode_mode');
+            }
+        } else if (this.hasCapability('ecomode_mode') === true) {
+            await this.removeCapability('ecomode_mode');
         }
         if (this.hasCapability('heater_mode') === false) {
             await this.addCapability('heater_mode');
@@ -504,10 +514,12 @@ export class EWindDevice extends eWind {
             await this.sendHoldingRequest(135, value * 10);
         });
     
-        this.registerCapabilityListener('ecomode_mode', async (value) => {
-            if (!this.isUsable()) return;
-            await this.sendCoilRequest(40, value === '1');
-        });
+        if (this.driver.supportsEcoMode) {
+            this.registerCapabilityListener('ecomode_mode', async (value) => {
+                if (!this.isUsable()) return;
+                await this.sendCoilRequest(40, value === '1');
+            });
+        }
     
         this.registerCapabilityListener('heating_coil_state', async (value) => {
             if (!this.isUsable()) return;

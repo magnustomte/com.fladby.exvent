@@ -13,6 +13,11 @@ export class EWindDriver extends Homey.Driver {
         return '';
     }
 
+    /** Whether units on this driver have eco mode. EDA automation reserves its coil. */
+    get supportsEcoMode(): boolean {
+        return true;
+    }
+
     async onInit() {
         this.registerFlowCards();
     }
@@ -36,11 +41,13 @@ export class EWindDriver extends Homey.Driver {
     private registerFlowCards() {
         const { flow } = this.homey;
 
-        flow.getActionCard(this.cardId('ecomode')).registerRunListener(async (args: any) => {
-            if (!args.device.isUsable()) return false;
-            await args.device.setMode('ecomode_mode', args.ecomode);
-            await args.device.sendCoilRequest(40, args.ecomode === '1');
-        });
+        if (this.supportsEcoMode) {
+            flow.getActionCard(this.cardId('ecomode')).registerRunListener(async (args: any) => {
+                if (!args.device.isUsable()) return false;
+                await args.device.setMode('ecomode_mode', args.ecomode);
+                await args.device.sendCoilRequest(40, args.ecomode === '1');
+            });
+        }
 
         flow.getActionCard(this.cardId('heatingcoil')).registerRunListener(async (args: any) => {
             if (!args.device.isUsable()) return false;

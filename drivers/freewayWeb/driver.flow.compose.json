@@ -1,43 +1,6 @@
 {
   "actions": [
     {
-      "id": "ecomode_freeway",
-      "title": {
-        "en": "Set ecomode to ",
-        "no": "Sett økomodus til "
-      },
-      "titleFormatted": {
-        "en": "Set ecomode to [[ecomode]]",
-        "no": "Sett økomodus til [[ecomode]]"
-      },
-      "hint": {
-        "en": "Set ecomode to",
-        "no": "Sett økomodus til"
-      },
-      "args": [
-        {
-          "type": "dropdown",
-          "name": "ecomode",
-          "values": [
-            {
-              "id": "1",
-              "label": {
-                "en": "active",
-                "no": "aktiv"
-              }
-            },
-            {
-              "id": "0",
-              "label": {
-                "en": "inactive",
-                "no": "inaktiv"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "heatingcoil_freeway",
       "title": {
         "en": "Set heatingcoil to",
@@ -172,7 +135,7 @@
         "en": "Filter needs replacement",
         "no": "Filter må byttes"
       },
-    "args": []
+      "args": []
     },
     {
       "id": "eWindstatus_mode_changed_freeway",

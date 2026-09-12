@@ -5,6 +5,10 @@ class MyFreewayWebDriver extends EWindDriver {
         return '_freeway';
     }
 
+    get supportsEcoMode(): boolean {
+        return false;
+    }
+
     async onInit() {
         await super.onInit();
         this.log('MyFreewayWebDriver has been initialized');

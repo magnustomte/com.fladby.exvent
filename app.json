@@ -1310,48 +1310,6 @@
         ]
       },
       {
-        "id": "ecomode_freeway",
-        "title": {
-          "en": "Set ecomode to ",
-          "no": "Sett økomodus til "
-        },
-        "titleFormatted": {
-          "en": "Set ecomode to [[ecomode]]",
-          "no": "Sett økomodus til [[ecomode]]"
-        },
-        "hint": {
-          "en": "Set ecomode to",
-          "no": "Sett økomodus til"
-        },
-        "args": [
-          {
-            "type": "device",
-            "name": "device",
-            "filter": "driver_id=freewayWeb"
-          },
-          {
-            "type": "dropdown",
-            "name": "ecomode",
-            "values": [
-              {
-                "id": "1",
-                "label": {
-                  "en": "active",
-                  "no": "aktiv"
-                }
-              },
-              {
-                "id": "0",
-                "label": {
-                  "en": "inactive",
-                  "no": "inaktiv"
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
         "id": "heatingcoil_freeway",
         "title": {
           "en": "Set heatingcoil to",
@@ -1896,7 +1854,6 @@
         "measure_temperature.exhaustAir",
         "measure_temperature.extractAir",
         "measure_temperature.supplyAirHRC",
-        "ecomode_mode",
         "measure_temperature.step",
         "heater_mode",
         "heat_exchanger_mode",
@@ -1998,12 +1955,6 @@
           "title": {
             "en": "Mode",
             "no": "Modus"
-          }
-        },
-        "ecomode_mode": {
-          "title": {
-            "en": "Ecomode",
-            "no": "Økomodus"
           }
         },
         "target_temperature.step": {
