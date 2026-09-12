@@ -1,5 +1,11 @@
 import Homey from 'homey';
 
+/** What a driver's units support beyond the register map they all share. */
+export interface DriverFeatures {
+    /** Eco mode, coil 40. Exists on MD automation; the coil is reserved on EDA. */
+    ecoMode: boolean;
+}
+
 /**
  * Shared driver for Enervent units that use the eWind register map.
  *
@@ -13,9 +19,10 @@ export class EWindDriver extends Homey.Driver {
         return '';
     }
 
-    /** Whether units on this driver have eco mode. EDA automation reserves its coil. */
-    get supportsEcoMode(): boolean {
-        return true;
+    get features(): DriverFeatures {
+        return {
+            ecoMode: true,
+        };
     }
 
     async onInit() {
@@ -41,7 +48,7 @@ export class EWindDriver extends Homey.Driver {
     private registerFlowCards() {
         const { flow } = this.homey;
 
-        if (this.supportsEcoMode) {
+        if (this.features.ecoMode) {
             flow.getActionCard(this.cardId('ecomode')).registerRunListener(async (args: any) => {
                 if (!args.device.isUsable()) return false;
                 await args.device.setMode('ecomode_mode', args.ecomode);

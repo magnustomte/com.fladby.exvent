@@ -327,7 +327,7 @@ export class EWindDevice extends eWind {
 
     /** The coils to read each poll, leaving out eco mode where the unit lacks it. */
     private coilsToPoll(): Object {
-        if (this.driver.supportsEcoMode) return this.coilRegisters;
+        if (this.driver.features.ecoMode) return this.coilRegisters;
         return Object.fromEntries(Object.entries(this.coilRegisters).filter(([key]) => key !== 'eco_mode'));
     }
 
@@ -438,7 +438,7 @@ export class EWindDevice extends eWind {
         if (this.hasCapability('measure_temperature.supplyAirHRC') === false) {
             await this.addCapability('measure_temperature.supplyAirHRC');
         }
-        if (this.driver.supportsEcoMode) {
+        if (this.driver.features.ecoMode) {
             if (this.hasCapability('ecomode_mode') === false) {
                 await this.addCapability('ecomode_mode');
             }
@@ -514,7 +514,7 @@ export class EWindDevice extends eWind {
             await this.sendHoldingRequest(135, value * 10);
         });
     
-        if (this.driver.supportsEcoMode) {
+        if (this.driver.features.ecoMode) {
             this.registerCapabilityListener('ecomode_mode', async (value) => {
                 if (!this.isUsable()) return;
                 await this.sendCoilRequest(40, value === '1');

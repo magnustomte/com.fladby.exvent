@@ -1,12 +1,15 @@
-import { EWindDriver } from '../eWindDriver';
+import { DriverFeatures, EWindDriver } from '../eWindDriver';
 
 class MyFreewayWebDriver extends EWindDriver {
     protected get flowSuffix(): string {
         return '_freeway';
     }
 
-    get supportsEcoMode(): boolean {
-        return false;
+    get features(): DriverFeatures {
+        return {
+            ...super.features,
+            ecoMode: false,
+        };
     }
 
     async onInit() {
