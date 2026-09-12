@@ -456,6 +456,19 @@ export class EWindDevice extends eWind {
         await this.sendHoldingRequest(setting.address, raw);
     }
 
+    /**
+     * Writes one of the unit settings and records it in the device settings.
+     * For flow cards; saving the settings in Homey goes through onSettings.
+     */
+    async setUnitSetting(key: string, value: number | boolean) {
+        const setting = UNIT_SETTINGS[key];
+        if (setting === undefined || !this.driver.features[setting.feature]) {
+            throw new Error(`This device does not support the setting ${key}`);
+        }
+        await this.writeUnitSetting(setting, value);
+        await this.setSettings({ [key]: value });
+    }
+
     async sendHoldingRequest(register: number, value: number) {
         await this.write(`holding register ${register}`, value, client => (this.useMultipleWrites
             ? client.writeMultipleRegisters(register, [value])
@@ -576,6 +589,12 @@ export class EWindDevice extends eWind {
                 break;
             case 'alarm_b.desc':
                 if (value === true) await trigger('alarm_b_triggered');
+                break;
+            case 'defrosting':
+                await trigger(value ? 'defrosting_started' : 'defrosting_stopped');
+                break;
+            case 'cooling_active':
+                await trigger(value ? 'cooling_started' : 'cooling_stopped');
                 break;
             default:
                 break;

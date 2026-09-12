@@ -75,7 +75,12 @@ export class EWindDriver extends Homey.Driver {
         flow.getActionCard(this.cardId('heatingcoil')).registerRunListener(async (args: any) => {
             if (!args.device.isUsable()) return false;
             await args.device.setMode('heating_coil_state', args.heatingcoil);
-            await args.device.sendCoilRequest(54, args.heatingcoil === '1');
+            if (this.features.seasonControl) {
+                // Also updates the "heating allowed" device setting straight away
+                await args.device.setUnitSetting('heating_allowed', args.heatingcoil === '1');
+            } else {
+                await args.device.sendCoilRequest(54, args.heatingcoil === '1');
+            }
         });
 
         flow.getActionCard(this.cardId('status-mode')).registerRunListener(async (args: any) => {
@@ -89,6 +94,37 @@ export class EWindDriver extends Homey.Driver {
             await args.device.setCapabilityValue('target_temperature.step', args.temperature);
             await args.device.sendHoldingRequest(135, args.temperature * 10);
         });
+
+        if (this.features.overpressureTiming) {
+            flow.getActionCard(this.cardId('set-overpressure-duration')).registerRunListener(async (args: any) => {
+                if (!args.device.isUsable()) return false;
+                await args.device.setUnitSetting('overpressure_duration', args.minutes);
+            });
+        }
+
+        if (this.features.seasonControl) {
+            flow.getActionCard(this.cardId('set-cooling')).registerRunListener(async (args: any) => {
+                if (!args.device.isUsable()) return false;
+                await args.device.setUnitSetting('cooling_allowed', args.allowed === '1');
+            });
+            flow.getActionCard(this.cardId('set-heating-block-temperature')).registerRunListener(async (args: any) => {
+                if (!args.device.isUsable()) return false;
+                await args.device.setUnitSetting('heating_block_temperature', args.temperature);
+            });
+            flow.getActionCard(this.cardId('set-cooling-block-temperature')).registerRunListener(async (args: any) => {
+                if (!args.device.isUsable()) return false;
+                await args.device.setUnitSetting('cooling_block_temperature', args.temperature);
+            });
+        }
+
+        if (this.features.heatPumpStatus) {
+            flow.getConditionCard(this.cardId('defrosting_is')).registerRunListener(async (args: any) => {
+                return args.device.getCapabilityValue('defrosting') === true;
+            });
+            flow.getConditionCard(this.cardId('cooling_active_is')).registerRunListener(async (args: any) => {
+                return args.device.getCapabilityValue('cooling_active') === true;
+            });
+        }
 
         const conditions: Record<string, string> = {
             eWindstatus_mode_is: 'eWindstatus_mode',
