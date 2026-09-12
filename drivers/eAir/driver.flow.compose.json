@@ -134,8 +134,8 @@
             {
               "id": "2",
               "label": {
-                "en": "Fireplace",
-                "no": "Peismodus"
+                "en": "Overpressure",
+                "no": "Overtrykk"
               }
             },
             {
@@ -210,8 +210,8 @@
             {
               "id": "2",
               "label": {
-                "en": "Fireplace",
-                "no": "Peismodus"
+                "en": "Overpressure",
+                "no": "Overtrykk"
               }
             },
             {
@@ -340,8 +340,8 @@
             {
               "id": "fireplace",
               "label": {
-                "en": "Fireplace",
-                "no": "Peismodus"
+                "en": "Overpressure",
+                "no": "Overtrykk"
               }
             },
             {

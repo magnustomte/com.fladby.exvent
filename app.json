@@ -104,8 +104,8 @@
               {
                 "id": "2",
                 "label": {
-                  "en": "Fireplace",
-                  "no": "Peismodus"
+                  "en": "Overpressure",
+                  "no": "Overtrykk"
                 }
               },
               {
@@ -273,8 +273,8 @@
               {
                 "id": "2",
                 "label": {
-                  "en": "Fireplace",
-                  "no": "Peismodus"
+                  "en": "Overpressure",
+                  "no": "Overtrykk"
                 }
               },
               {
@@ -442,8 +442,8 @@
               {
                 "id": "2",
                 "label": {
-                  "en": "Fireplace",
-                  "no": "Peismodus"
+                  "en": "Overpressure",
+                  "no": "Overtrykk"
                 }
               },
               {
@@ -587,8 +587,8 @@
               {
                 "id": "fireplace",
                 "label": {
-                  "en": "Fireplace",
-                  "no": "Peismodus"
+                  "en": "Overpressure",
+                  "no": "Overtrykk"
                 }
               },
               {
@@ -722,8 +722,8 @@
               {
                 "id": "2",
                 "label": {
-                  "en": "Fireplace",
-                  "no": "Peismodus"
+                  "en": "Overpressure",
+                  "no": "Overtrykk"
                 }
               },
               {
@@ -857,8 +857,8 @@
               {
                 "id": "2",
                 "label": {
-                  "en": "Fireplace",
-                  "no": "Peismodus"
+                  "en": "Overpressure",
+                  "no": "Overtrykk"
                 }
               },
               {
@@ -1111,8 +1111,8 @@
               {
                 "id": "2",
                 "label": {
-                  "en": "Fireplace",
-                  "no": "Peismodus"
+                  "en": "Overpressure",
+                  "no": "Overtrykk"
                 }
               },
               {
@@ -1287,8 +1287,8 @@
               {
                 "id": "2",
                 "label": {
-                  "en": "Fireplace",
-                  "no": "Peismodus"
+                  "en": "Overpressure",
+                  "no": "Overtrykk"
                 }
               },
               {
@@ -1421,8 +1421,8 @@
               {
                 "id": "2",
                 "label": {
-                  "en": "Fireplace",
-                  "no": "Peismodus"
+                  "en": "Overpressure",
+                  "no": "Overtrykk"
                 }
               },
               {
@@ -2068,8 +2068,8 @@
                 "no": "Varighet for overtrykk"
               },
               "hint": {
-                "en": "How long overpressure (fireplace mode) runs before the unit returns to normal. Stored on the unit, and also changed if you set it on the unit's panel.",
-                "no": "Hvor lenge overtrykk (peismodus) varer før aggregatet går tilbake til normal drift. Lagres på aggregatet, og endres også hvis du setter den på panelet."
+                "en": "How long overpressure runs before the unit returns to normal. Stored on the unit, and also changed if you set it on the unit's panel.",
+                "no": "Hvor lenge overtrykk varer før aggregatet går tilbake til normal drift. Lagres på aggregatet, og endres også hvis du setter den på panelet."
               }
             }
           ]
@@ -2304,8 +2304,8 @@
         {
           "id": "2",
           "title": {
-            "en": "Fireplace",
-            "no": "Peismodus"
+            "en": "Overpressure",
+            "no": "Overtrykk"
           }
         },
         {
@@ -2491,8 +2491,8 @@
         {
           "id": "2",
           "title": {
-            "en": "Fireplace",
-            "no": "Peismodus"
+            "en": "Overpressure",
+            "no": "Overtrykk"
           }
         },
         {

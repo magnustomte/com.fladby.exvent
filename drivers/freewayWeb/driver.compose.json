@@ -224,8 +224,8 @@
             "no": "Varighet for overtrykk"
           },
           "hint": {
-            "en": "How long overpressure (fireplace mode) runs before the unit returns to normal. Stored on the unit, and also changed if you set it on the unit's panel.",
-            "no": "Hvor lenge overtrykk (peismodus) varer før aggregatet går tilbake til normal drift. Lagres på aggregatet, og endres også hvis du setter den på panelet."
+            "en": "How long overpressure runs before the unit returns to normal. Stored on the unit, and also changed if you set it on the unit's panel.",
+            "no": "Hvor lenge overtrykk varer før aggregatet går tilbake til normal drift. Lagres på aggregatet, og endres også hvis du setter den på panelet."
           }
         }
       ]
