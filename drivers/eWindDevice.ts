@@ -34,6 +34,21 @@ const UNIT_SETTINGS: Record<string, UnitSetting> = {
 
 const CONNECTION_SETTINGS = ['address', 'port', 'unitId'];
 
+/** Registers and coils polled only when their driver feature is on. */
+const OPTIONAL_POLL_KEYS: Record<string, keyof DriverFeatures> = {
+    eco_mode: 'ecoMode',
+    fan_speed_panel: 'heatPumpStatus',
+    cooling_status: 'heatPumpStatus',
+};
+
+/** Capabilities a device has only when their driver feature is on. */
+const OPTIONAL_CAPABILITIES: Record<string, keyof DriverFeatures> = {
+    ecomode_mode: 'ecoMode',
+    'fanspeed_level.panel': 'heatPumpStatus',
+    cooling_active: 'heatPumpStatus',
+    defrosting: 'heatPumpStatus',
+};
+
 /** Turns a jsmodbus rejection into a reason a user can act on. */
 const describeModbusError = (err: any): string => {
     const body = err?.response?.body;
@@ -312,9 +327,9 @@ export class EWindDevice extends eWind {
         }
 
         try {
-            const checkRegisterRes = await checkRegister(this.registers, this.client);
+            const checkRegisterRes = await checkRegister(this.withEnabledFeatures(this.registers), this.client);
             await this.processResult({ ...checkRegisterRes });
-            const checkCoilsRes = await checkCoils(this.coilsToPoll(), this.client);
+            const checkCoilsRes = await checkCoils(this.withEnabledFeatures(this.coilRegisters), this.client);
             await this.processResult({ ...checkCoilsRes });
             await this.syncUnitSettings();
             if (this.isActive) {
@@ -348,10 +363,12 @@ export class EWindDevice extends eWind {
         }
     }
 
-    /** The coils to read each poll, leaving out eco mode where the unit lacks it. */
-    private coilsToPoll(): Object {
-        if (this.driver.features.ecoMode) return this.coilRegisters;
-        return Object.fromEntries(Object.entries(this.coilRegisters).filter(([key]) => key !== 'eco_mode'));
+    /** Drops the entries of a register map whose driver feature is off. */
+    private withEnabledFeatures(registers: Object): Object {
+        return Object.fromEntries(Object.entries(registers).filter(([key]) => {
+            const feature = OPTIONAL_POLL_KEYS[key];
+            return feature === undefined || this.driver.features[feature];
+        }));
     }
 
     async setEWindValue(value: string) {
@@ -504,12 +521,12 @@ export class EWindDevice extends eWind {
         if (this.hasCapability('measure_temperature.supplyAirHRC') === false) {
             await this.addCapability('measure_temperature.supplyAirHRC');
         }
-        if (this.driver.features.ecoMode) {
-            if (this.hasCapability('ecomode_mode') === false) {
-                await this.addCapability('ecomode_mode');
+        for (const [capability, feature] of Object.entries(OPTIONAL_CAPABILITIES)) {
+            if (this.driver.features[feature]) {
+                if (!this.hasCapability(capability)) await this.addCapability(capability);
+            } else if (this.hasCapability(capability)) {
+                await this.removeCapability(capability);
             }
-        } else if (this.hasCapability('ecomode_mode') === true) {
-            await this.removeCapability('ecomode_mode');
         }
         if (this.hasCapability('heater_mode') === false) {
             await this.addCapability('heater_mode');

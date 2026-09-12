@@ -11,6 +11,12 @@ export interface DriverFeatures {
      * that block them (holding registers 196 and 164), as device settings.
      */
     seasonControl: boolean;
+    /**
+     * What the unit overrides on its own, which matters on heat pump units: the
+     * fan level set on the panel next to the level in effect, defrosting, and
+     * cooling in operation.
+     */
+    heatPumpStatus: boolean;
 }
 
 /**
@@ -31,6 +37,7 @@ export class EWindDriver extends Homey.Driver {
             ecoMode: true,
             overpressureTiming: false,
             seasonControl: false,
+            heatPumpStatus: false,
         };
     }
 

@@ -12,11 +12,14 @@
     "measure_temperature.supplyAirHRC",
     "measure_temperature.step",
     "heater_mode",
+    "cooling_active",
+    "defrosting",
     "heat_exchanger_mode",
     "target_temperature.step",
     "alarm_b.desc",
     "measure_humidity.extractAir",
     "fanspeed_level",
+    "fanspeed_level.panel",
     "eWindstatus",
     "eWindstatus_mode",
     "lastPollTime",
@@ -73,8 +76,8 @@
     },
     "heater_mode": {
       "title": {
-        "en": "Heating element",
-        "no": "Varmeelement"
+        "en": "Heating active",
+        "no": "Varme i drift"
       }
     },
     "heat_exchanger_mode": {
@@ -97,8 +100,11 @@
     },
     "fanspeed_level": {
       "title": {
-        "en": "Fan speed level",
+        "en": "Fan level",
         "no": "Viftenivå"
+      },
+      "units": {
+        "en": "%"
       }
     },
     "eWindstatus": {
@@ -126,6 +132,15 @@
       "title": {
         "en": "Last poll time",
         "no": "Siste polling"
+      }
+    },
+    "fanspeed_level.panel": {
+      "title": {
+        "en": "Fan level set",
+        "no": "Viftenivå innstilt"
+      },
+      "units": {
+        "en": "%"
       }
     }
   },

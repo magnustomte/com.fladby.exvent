@@ -11,6 +11,7 @@ class MyFreewayWebDriver extends EWindDriver {
             ecoMode: false,
             overpressureTiming: true,
             seasonControl: true,
+            heatPumpStatus: true,
         };
     }
 

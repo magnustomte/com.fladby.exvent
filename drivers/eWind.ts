@@ -18,6 +18,7 @@ export class eWind extends Homey.Device {
         "air_extract_eff": [30, 1, 'UINT16', "Heat recovery efficiency, exhaust air"], 
         "temperature_setpoint": [135, 1, 'INT16', "Temperature setpoint"], 
         "fan_speed_level": [50, 1, 'UINT16', "Fan speed level"], 
+        "fan_speed_panel": [53, 1, 'UINT16', "Fan speed level set on the panel"],
         "status": [45, 1, 'INT16', "status"], 
         "status_mode": [44, 1, 'INT16', "statusMode"],
     };
@@ -28,6 +29,7 @@ export class eWind extends Homey.Device {
         "heater_status": [32, 1, 'UINT32', "After-heater On/Off"], 
         "heat_exchanger_state": [30, 1, 'UINT32', "State of Heat exchanger On/Off"], 
         "heating_coil": [54, 1, 'UINT32', "State of Heater coil On/Off"], 
+        "cooling_status": [28, 1, 'UINT32', "Cooling in operation"],
     };
 
     /**
@@ -144,6 +146,17 @@ export class eWind extends Homey.Device {
                 mode = '1'; // away, long away
             }
             await this.setIfChanged('eWindstatus_mode', mode);
+            if (this.hasCapability('defrosting')) {
+                await this.setIfChanged('defrosting', Boolean(state & 32768));
+            }
+        }
+
+        if (result['fan_speed_panel'] && result['fan_speed_panel'].value !== 'xxx') {
+            await this.setIfChanged('fanspeed_level.panel', Number(result['fan_speed_panel'].value));
+        }
+
+        if (result['cooling_status'] && result['cooling_status'].value !== 'xxx') {
+            await this.setIfChanged('cooling_active', result['cooling_status'].value === '1');
         }
 
         if (result['eco_mode'] && result['eco_mode'].value !== 'xxx') {
