@@ -15,11 +15,10 @@
     "@types/node": "^25.0.3",
     "eslint": "^8.57.0",
     "eslint-config-athom": "^3.1.5",
+    "homey": "^3.12.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@tsconfig/node22": "^22.0.5",
-    "homey": "^3.12.0",
     "jsmodbus": "^4.0.10"
   }
 }

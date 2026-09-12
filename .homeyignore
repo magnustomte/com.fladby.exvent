@@ -1,0 +1,6 @@
+# Kept in the repository but not needed on Homey
+docs/
+README.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+.vscode/
