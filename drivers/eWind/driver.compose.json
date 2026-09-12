@@ -26,50 +26,50 @@
   "capabilitiesOptions": {
     "measure_temperature.exhaustAir": {
       "title": {
-        "en": "Exhaust Air",
-        "no": "Utkast"
+        "en": "Exhaust air",
+        "no": "Avkast"
       }
     },
     "measure_temperature.extractAir": {
       "title": {
-        "en": "Extract Air temperature",
+        "en": "Extract air",
         "no": "Avtrekk"
       }
     },
     "measure_temperature.outsideAir": {
       "title": {
-        "en": "Fresh Air",
-        "no": "Inntak"
+        "en": "Fresh air",
+        "no": "Uteluft"
       }
     },
     "measure_temperature.supplyAirHRC": {
       "title": {
-        "en": "Supply Air after Heat recovery",
+        "en": "Supply air after heat recovery",
         "no": "Tilluft etter varmegjenvinning"
       }
     },
     "measure_temperature.step": {
       "title": {
-        "en": "Supply Air",
+        "en": "Supply air",
         "no": "Tilluft"
       }
     },
     "measure_humidity.extractAir": {
       "title": {
-        "en": "Extract Air humidity",
-        "no": "Avtrekksfuktighet"
+        "en": "Extract air humidity",
+        "no": "Luftfuktighet avtrekk"
       }
     },
     "efficiency.supplyEff": {
       "title": {
         "en": "Supply air efficiency",
-        "no": "Tilluftseffektivitet"
+        "no": "Virkningsgrad tilluft"
       }
     },
     "efficiency.extractEff": {
       "title": {
-        "en": "Exhaust Air efficiency",
-        "no": "Avtrekkseffektivitet"
+        "en": "Extract air efficiency",
+        "no": "Virkningsgrad avtrekk"
       }
     },
     "heater_mode": {
@@ -86,19 +86,19 @@
     },
     "heating_coil_state": {
       "title": {
-        "en": "Heatingcoil",
-        "no": "Varmespole"
+        "en": "Heating allowed",
+        "no": "Varme tillatt"
       }
     },
     "alarm_b.desc": {
       "title": {
-        "en": "Filteralarm",
+        "en": "Filter alarm",
         "no": "Filteralarm"
       }
     },
     "fanspeed_level": {
       "title": {
-        "en": "Fan speed level",
+        "en": "Fan level",
         "no": "Viftenivå"
       }
     },
@@ -116,7 +116,7 @@
     },
     "ecomode_mode": {
       "title": {
-        "en": "Ecomode",
+        "en": "Eco mode",
         "no": "Økomodus"
       }
     },
@@ -131,7 +131,7 @@
     },
     "lastPollTime": {
       "title": {
-        "en": "Last poll time",
+        "en": "Last poll",
         "no": "Siste polling"
       }
     }
@@ -155,7 +155,8 @@
     {
       "type": "group",
       "label": {
-        "en": "eWind settings"
+        "en": "eWind settings",
+        "no": "eWind-innstillinger"
       },
       "children": [
         {
@@ -163,7 +164,8 @@
           "type": "text",
           "value": "0.0.0.0",
           "label": {
-            "en": "IP Address"
+            "en": "IP address",
+            "no": "IP-adresse"
           }
         },
         {
@@ -172,7 +174,8 @@
           "value": 502,
           "step": 1,
           "label": {
-            "en": "Port"
+            "en": "Port",
+            "no": "Port"
           }
         },
         {

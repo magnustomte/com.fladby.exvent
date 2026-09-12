@@ -3,8 +3,8 @@
   "uiComponent": "sensor",
   "icon": "/assets/fanspeed.svg",
   "title": {
-    "en": "Fan speed level (1-4)",
-    "no": "Viftenivå (1-4)"
+    "en": "Fan level",
+    "no": "Viftenivå"
   },
   "desc": {
     "en": "Fan level changed",

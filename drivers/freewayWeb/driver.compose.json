@@ -28,50 +28,50 @@
   "capabilitiesOptions": {
     "measure_temperature.exhaustAir": {
       "title": {
-        "en": "Exhaust Air",
-        "no": "Utkast"
+        "en": "Exhaust air",
+        "no": "Avkast"
       }
     },
     "measure_temperature.extractAir": {
       "title": {
-        "en": "Extract Air temperature",
+        "en": "Extract air",
         "no": "Avtrekk"
       }
     },
     "measure_temperature.outsideAir": {
       "title": {
-        "en": "Fresh Air",
-        "no": "Inntak"
+        "en": "Fresh air",
+        "no": "Uteluft"
       }
     },
     "measure_temperature.supplyAirHRC": {
       "title": {
-        "en": "Supply Air after Heat recovery",
+        "en": "Supply air after heat recovery",
         "no": "Tilluft etter varmegjenvinning"
       }
     },
     "measure_temperature.step": {
       "title": {
-        "en": "Supply Air",
+        "en": "Supply air",
         "no": "Tilluft"
       }
     },
     "measure_humidity.extractAir": {
       "title": {
-        "en": "Extract Air humidity",
-        "no": "Avtrekksfuktighet"
+        "en": "Extract air humidity",
+        "no": "Luftfuktighet avtrekk"
       }
     },
     "efficiency.supplyEff": {
       "title": {
         "en": "Supply air efficiency",
-        "no": "Tilluftseffektivitet"
+        "no": "Virkningsgrad tilluft"
       }
     },
     "efficiency.extractEff": {
       "title": {
-        "en": "Exhaust Air efficiency",
-        "no": "Avtrekkseffektivitet"
+        "en": "Extract air efficiency",
+        "no": "Virkningsgrad avtrekk"
       }
     },
     "heater_mode": {
@@ -88,13 +88,13 @@
     },
     "heating_coil_state": {
       "title": {
-        "en": "Heatingcoil",
-        "no": "Varmespole"
+        "en": "Heating allowed",
+        "no": "Varme tillatt"
       }
     },
     "alarm_b.desc": {
       "title": {
-        "en": "Filteralarm",
+        "en": "Filter alarm",
         "no": "Filteralarm"
       }
     },
@@ -111,7 +111,51 @@
       "title": {
         "en": "Status",
         "no": "Status"
-      }
+      },
+      "values": [
+        {
+          "id": "0",
+          "title": {
+            "en": "No heating or cooling",
+            "no": "Ingen varme eller kjøling"
+          }
+        },
+        {
+          "id": "1",
+          "title": {
+            "en": "Cooling",
+            "no": "Kjøling"
+          }
+        },
+        {
+          "id": "2",
+          "title": {
+            "en": "Heat recovery",
+            "no": "Varmegjenvinning"
+          }
+        },
+        {
+          "id": "3",
+          "title": {
+            "en": "Heating",
+            "no": "Varme"
+          }
+        },
+        {
+          "id": "4",
+          "title": {
+            "en": "Starting up",
+            "no": "Starter opp"
+          }
+        },
+        {
+          "id": "5",
+          "title": {
+            "en": "Stopped",
+            "no": "Stoppet"
+          }
+        }
+      ]
     },
     "eWindstatus_mode": {
       "title": {
@@ -130,7 +174,7 @@
     },
     "lastPollTime": {
       "title": {
-        "en": "Last poll time",
+        "en": "Last poll",
         "no": "Siste polling"
       }
     },
@@ -172,7 +216,8 @@
           "type": "text",
           "value": "0.0.0.0",
           "label": {
-            "en": "IP Address"
+            "en": "IP address",
+            "no": "IP-adresse"
           }
         },
         {
@@ -181,7 +226,8 @@
           "value": 502,
           "step": 1,
           "label": {
-            "en": "Port"
+            "en": "Port",
+            "no": "Port"
           }
         },
         {
