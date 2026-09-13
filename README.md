@@ -14,7 +14,7 @@ The app polls the unit about every 60 seconds.
 
 **eWind and eAir:** turn on Modbus TCP in the Exvent app.
 
-**Freeway WEB:** in the Freeway web interface, open Configuration → Access control configuration, enter your Homey's IP address as the Modbus/TCP client and save. The adapter only accepts Modbus connections from that address, so give Homey a fixed IP address.
+**EDA:** in the web interface of the Freeway WEB adapter, open Configuration → Access control configuration, enter your Homey's IP address as the Modbus/TCP client and save. The adapter only accepts Modbus connections from that address, so give Homey a fixed IP address.
 
 Give the unit or adapter a fixed IP address in your router.
 

@@ -1,6 +1,6 @@
 {
   "name": {
-    "en": "Freeway WEB"
+    "en": "EDA"
   },
   "class": "other",
   "capabilities": [
@@ -207,8 +207,8 @@
     {
       "type": "group",
       "label": {
-        "en": "Freeway WEB settings",
-        "no": "Freeway WEB-innstillinger"
+        "en": "EDA settings",
+        "no": "EDA-innstillinger"
       },
       "children": [
         {
@@ -242,8 +242,8 @@
             "no": "Modbus slave-ID"
           },
           "hint": {
-            "en": "Freeway WEB presents the ventilation unit on slave ID 1. Only change this if your setup differs.",
-            "no": "Freeway WEB presenterer aggregatet på slave-ID 1. Endre kun hvis oppsettet ditt avviker."
+            "en": "A Freeway WEB adapter presents the unit on slave ID 1. Only change this if your setup differs.",
+            "no": "En Freeway WEB-adapter presenterer aggregatet på slave-ID 1. Endre kun hvis oppsettet ditt avviker."
           }
         }
       ]

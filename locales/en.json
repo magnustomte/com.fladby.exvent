@@ -8,9 +8,9 @@
       "title": "Add eAir ventilation unit",
       "intro": "Enter the IP address and port of your eAir unit, and make sure Modbus TCP is turned on in the Exvent app."
     },
-    "freeway": {
-      "title": "Add Freeway WEB ventilation unit",
-      "intro": "Enter the IP address and port of your Freeway WEB adapter. First enable Modbus/TCP in the Freeway's own web interface: Configuration → Access control configuration, put your Homey's IP address in “IP address of Modbus/TCP client” and click Save Modbus/TCP. Until you do, the adapter refuses connections on port 502."
+    "eda": {
+      "title": "Add EDA ventilation unit",
+      "intro": "Enter the IP address and port of the Freeway WEB adapter connected to your EDA unit. First enable Modbus/TCP in the Freeway's own web interface: Configuration → Access control configuration, put your Homey's IP address in “IP address of Modbus/TCP client” and click Save Modbus/TCP. Until you do, the adapter refuses connections on port 502."
     },
     "name": "Name",
     "default_name": "Ventilation",

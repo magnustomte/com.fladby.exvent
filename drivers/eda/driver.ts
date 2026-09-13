@@ -1,8 +1,8 @@
 import { DriverFeatures, EWindDriver } from '../eWindDriver';
 
-class MyFreewayWebDriver extends EWindDriver {
+class MyEdaDriver extends EWindDriver {
     protected get flowSuffix(): string {
-        return '_freeway';
+        return '_eda';
     }
 
     get features(): DriverFeatures {
@@ -17,8 +17,8 @@ class MyFreewayWebDriver extends EWindDriver {
 
     async onInit() {
         await super.onInit();
-        this.log('MyFreewayWebDriver has been initialized');
+        this.log('MyEdaDriver has been initialized');
     }
 }
 
-module.exports = MyFreewayWebDriver;
+module.exports = MyEdaDriver;

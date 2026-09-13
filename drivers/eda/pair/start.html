@@ -1,20 +1,20 @@
 <script type="text/javascript">
 
-Homey.setTitle( __('pair.freeway.title') );
+Homey.setTitle( __('pair.eda.title') );
 
 $(function() {
   $('#name').val( __('pair.default_name') );
 
   $('#connect').click(function() {
-    $('.freewayWeb-error').hide();
+    $('.eda-error').hide();
 
     var inputname = $('#name').val().trim();
     var inputaddress = $('#address').val().trim();
     var inputport = Number($('#port').val());
 
     if (inputname === '' || inputaddress === '' || !inputport) {
-      $('.freewayWeb-error-msg').html( __('pair.nosettings') );
-      $('.freewayWeb-error').show();
+      $('.eda-error-msg').html( __('pair.nosettings') );
+      $('.eda-error').show();
       return;
     }
 
@@ -27,8 +27,8 @@ $(function() {
       settings : { address: inputaddress, port: inputport },
     }, function(error, result) {
       if (error) {
-        $('.freewayWeb-error-msg').html(error.message || error.toString());
-        $('.freewayWeb-error').show();
+        $('.eda-error-msg').html(error.message || error.toString());
+        $('.eda-error').show();
         return;
       }
       Homey.done();
@@ -46,14 +46,14 @@ $(function() {
   .form-group label {
     display: block;
   }
-  .freewayWeb-status, .freewayWeb-info {
+  .eda-status, .eda-info {
 		display: none;
 	}
-  .freewayWeb-info {
+  .eda-info {
     margin-top: 10px;
     font-size: 12px;
   }
-  .freewayWeb-info .info-label {
+  .eda-info .info-label {
     min-width: 150px;
     font-weight: 700;
   }
@@ -69,8 +69,8 @@ $(function() {
   }
 </style>
 
-<p data-i18n="pair.freeway.intro"></p>
-<div class="freewayWeb-pairing">
+<p data-i18n="pair.eda.intro"></p>
+<div class="eda-pairing">
   <div class="form-group">
     <label for="name" data-i18n="pair.name">Name</label>
     <input type="text" class="form-control" id="name" required>
@@ -89,5 +89,5 @@ $(function() {
 </div>
 
 <div class="messages">
-  <p class="freewayWeb-status freewayWeb-error" style="color: #ff6300;"><i class="fa fa-times"></i> <span class="freewayWeb-error-msg"></span></p>
+  <p class="eda-status eda-error" style="color: #ff6300;"><i class="fa fa-times"></i> <span class="eda-error-msg"></span></p>
 </div>

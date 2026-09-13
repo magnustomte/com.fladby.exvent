@@ -42,6 +42,7 @@
       "Enervent",
       "eWind",
       "eAir",
+      "EDA",
       "Freeway WEB"
     ],
     "no": [
@@ -52,6 +53,7 @@
       "Enervent",
       "eWind",
       "eAir",
+      "EDA",
       "Freeway WEB"
     ]
   },
@@ -388,7 +390,7 @@
         ]
       },
       {
-        "id": "alarm_b_triggered_freeway",
+        "id": "alarm_b_triggered_eda",
         "title": {
           "en": "Filter alarm triggered",
           "no": "Filteralarm utløst"
@@ -401,12 +403,12 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           }
         ]
       },
       {
-        "id": "eWindstatus_mode_changed_freeway",
+        "id": "eWindstatus_mode_changed_eda",
         "title": {
           "en": "Mode changed",
           "no": "Modus endret"
@@ -423,7 +425,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "name": "mode_title",
@@ -469,7 +471,7 @@
         ]
       },
       {
-        "id": "heat_exchanger_mode_changed_freeway",
+        "id": "heat_exchanger_mode_changed_eda",
         "title": {
           "en": "Heat exchanger changed",
           "no": "Varmeveksler endret"
@@ -486,7 +488,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "name": "mode_title",
@@ -511,7 +513,7 @@
         ]
       },
       {
-        "id": "heater_mode_changed_freeway",
+        "id": "heater_mode_changed_eda",
         "title": {
           "en": "Heating changed",
           "no": "Varme endret"
@@ -528,7 +530,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "name": "mode_title",
@@ -553,7 +555,7 @@
         ]
       },
       {
-        "id": "defrosting_started_freeway",
+        "id": "defrosting_started_eda",
         "title": {
           "en": "Defrosting started",
           "no": "Avriming startet"
@@ -566,12 +568,12 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           }
         ]
       },
       {
-        "id": "defrosting_stopped_freeway",
+        "id": "defrosting_stopped_eda",
         "title": {
           "en": "Defrosting ended",
           "no": "Avriming avsluttet"
@@ -584,12 +586,12 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           }
         ]
       },
       {
-        "id": "cooling_started_freeway",
+        "id": "cooling_started_eda",
         "title": {
           "en": "Cooling started",
           "no": "Kjøling startet"
@@ -598,12 +600,12 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           }
         ]
       },
       {
-        "id": "cooling_stopped_freeway",
+        "id": "cooling_stopped_eda",
         "title": {
           "en": "Cooling stopped",
           "no": "Kjøling stoppet"
@@ -612,7 +614,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           }
         ]
       }
@@ -889,7 +891,7 @@
         ]
       },
       {
-        "id": "eWindstatus_mode_is_freeway",
+        "id": "eWindstatus_mode_is_eda",
         "title": {
           "en": "Mode is",
           "no": "Modus er"
@@ -902,7 +904,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "name": "mode",
@@ -948,7 +950,7 @@
         ]
       },
       {
-        "id": "heat_exchanger_mode_is_freeway",
+        "id": "heat_exchanger_mode_is_eda",
         "title": {
           "en": "Heat exchanger is",
           "no": "Varmeveksler er"
@@ -961,7 +963,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "name": "mode",
@@ -986,7 +988,7 @@
         ]
       },
       {
-        "id": "heater_mode_is_freeway",
+        "id": "heater_mode_is_eda",
         "title": {
           "en": "Heating is",
           "no": "Varme er"
@@ -999,7 +1001,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "name": "mode",
@@ -1024,7 +1026,7 @@
         ]
       },
       {
-        "id": "defrosting_is_freeway",
+        "id": "defrosting_is_eda",
         "title": {
           "en": "!{{Is|Is not}} defrosting",
           "no": "Avriming !{{pågår|pågår ikke}}"
@@ -1033,12 +1035,12 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           }
         ]
       },
       {
-        "id": "cooling_active_is_freeway",
+        "id": "cooling_active_is_eda",
         "title": {
           "en": "Cooling !{{is|is not}} active",
           "no": "Kjøling !{{er|er ikke}} i drift"
@@ -1047,7 +1049,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           }
         ]
       }
@@ -1408,7 +1410,7 @@
         ]
       },
       {
-        "id": "heatingcoil_freeway",
+        "id": "heatingcoil_eda",
         "title": {
           "en": "Set heating",
           "no": "Sett varme"
@@ -1425,7 +1427,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "type": "dropdown",
@@ -1450,7 +1452,7 @@
         ]
       },
       {
-        "id": "set-temperature_freeway",
+        "id": "set-temperature_eda",
         "title": {
           "en": "Set target temperature",
           "no": "Sett ønsket temperatur"
@@ -1467,7 +1469,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "type": "range",
@@ -1480,7 +1482,7 @@
         ]
       },
       {
-        "id": "status-mode_freeway",
+        "id": "status-mode_eda",
         "title": {
           "en": "Set mode",
           "no": "Sett modus"
@@ -1497,7 +1499,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "type": "dropdown",
@@ -1543,7 +1545,7 @@
         ]
       },
       {
-        "id": "set-overpressure-duration_freeway",
+        "id": "set-overpressure-duration_eda",
         "title": {
           "en": "Set overpressure duration",
           "no": "Sett varighet for overtrykk"
@@ -1560,7 +1562,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "type": "range",
@@ -1573,7 +1575,7 @@
         ]
       },
       {
-        "id": "set-cooling_freeway",
+        "id": "set-cooling_eda",
         "title": {
           "en": "Set cooling",
           "no": "Sett kjøling"
@@ -1590,7 +1592,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "type": "dropdown",
@@ -1615,7 +1617,7 @@
         ]
       },
       {
-        "id": "set-heating-block-temperature_freeway",
+        "id": "set-heating-block-temperature_eda",
         "title": {
           "en": "Block heating above",
           "no": "Sperr varme over"
@@ -1632,7 +1634,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "type": "range",
@@ -1645,7 +1647,7 @@
         ]
       },
       {
-        "id": "set-cooling-block-temperature_freeway",
+        "id": "set-cooling-block-temperature_eda",
         "title": {
           "en": "Block cooling below",
           "no": "Sperr kjøling under"
@@ -1662,7 +1664,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=freewayWeb"
+            "filter": "driver_id=eda"
           },
           {
             "type": "range",
@@ -2081,7 +2083,7 @@
     },
     {
       "name": {
-        "en": "Freeway WEB"
+        "en": "EDA"
       },
       "class": "other",
       "capabilities": [
@@ -2276,8 +2278,8 @@
         "lan"
       ],
       "images": {
-        "small": "/drivers/freewayWeb/assets/images/small.jpg",
-        "large": "/drivers/freewayWeb/assets/images/large.jpg"
+        "small": "/drivers/eda/assets/images/small.jpg",
+        "large": "/drivers/eda/assets/images/large.jpg"
       },
       "pair": [
         {
@@ -2288,8 +2290,8 @@
         {
           "type": "group",
           "label": {
-            "en": "Freeway WEB settings",
-            "no": "Freeway WEB-innstillinger"
+            "en": "EDA settings",
+            "no": "EDA-innstillinger"
           },
           "children": [
             {
@@ -2323,8 +2325,8 @@
                 "no": "Modbus slave-ID"
               },
               "hint": {
-                "en": "Freeway WEB presents the ventilation unit on slave ID 1. Only change this if your setup differs.",
-                "no": "Freeway WEB presenterer aggregatet på slave-ID 1. Endre kun hvis oppsettet ditt avviker."
+                "en": "A Freeway WEB adapter presents the unit on slave ID 1. Only change this if your setup differs.",
+                "no": "En Freeway WEB-adapter presenterer aggregatet på slave-ID 1. Endre kun hvis oppsettet ditt avviker."
               }
             }
           ]
@@ -2431,7 +2433,7 @@
           ]
         }
       ],
-      "id": "freewayWeb"
+      "id": "eda"
     }
   ],
   "capabilities": {

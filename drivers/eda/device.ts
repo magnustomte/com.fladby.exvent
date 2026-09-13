@@ -1,21 +1,20 @@
 import { EWindDevice } from '../eWindDevice';
 
 /**
- * An Enervent unit with EDA automation, reached through a Freeway WEB bus
- * adapter. The adapter bridges Modbus TCP to the unit's RS-485 bus and always
- * presents it on slave ID 1.
+ * An Enervent unit with EDA automation, reached over Modbus TCP, normally
+ * through a Freeway WEB bus adapter, which presents the unit on slave ID 1.
  *
  * EDA and the MD automation used by eWind share the register addresses this
  * app reads, so the behaviour is inherited; only the slave ID and the Modbus
  * function codes used for writing differ.
  */
-class FreewayWebDevice extends EWindDevice {
+class EdaDevice extends EWindDevice {
     protected get defaultUnitId(): number {
         return 1;
     }
 
     protected get logLabel(): string {
-        return 'freewayWeb';
+        return 'eda';
     }
 
     // Freeway WEB acknowledges function codes 5 and 6 but never passes the
@@ -25,4 +24,4 @@ class FreewayWebDevice extends EWindDevice {
     }
 }
 
-module.exports = FreewayWebDevice;
+module.exports = EdaDevice;

@@ -7,6 +7,6 @@ Supported devices
 
 Before adding an eWind or eAir, turn on Modbus TCP in the Exvent app.
 
-Before adding a Freeway WEB, open the Freeway web interface, enter your Homey's IP address as the Modbus/TCP client under Access control configuration, and save. The adapter accepts Modbus connections from that one address only.
+Before adding an EDA unit, open the web interface of its Freeway WEB adapter, enter your Homey's IP address as the Modbus/TCP client under Access control configuration, and save. The adapter accepts Modbus connections from that one address only.
 
 Give the unit or adapter a fixed IP address in your router, and give Homey one too when using Freeway WEB.

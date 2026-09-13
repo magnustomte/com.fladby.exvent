@@ -8,9 +8,9 @@
       "title": "Legg til eAir ventilasjonsaggregat",
       "intro": "Skriv inn IP-adressen og porten til eAir-aggregatet, og kontroller at Modbus TCP er slått på i Exvent-appen."
     },
-    "freeway": {
-      "title": "Legg til Freeway WEB ventilasjonsaggregat",
-      "intro": "Skriv inn IP-adressen og porten til Freeway WEB-adapteren. Aktiver først Modbus/TCP i Freeway sitt eget webgrensesnitt: Configuration → Access control configuration, skriv IP-adressen til Homey i «IP address of Modbus/TCP client» og klikk Save Modbus/TCP. Før det avviser adapteren tilkoblinger på port 502."
+    "eda": {
+      "title": "Legg til EDA-ventilasjonsaggregat",
+      "intro": "Skriv inn IP-adressen og porten til Freeway WEB-adapteren som er koblet til EDA-aggregatet. Aktiver først Modbus/TCP i Freeway sitt eget webgrensesnitt: Configuration → Access control configuration, skriv IP-adressen til Homey i «IP address of Modbus/TCP client» og klikk Save Modbus/TCP. Før det avviser adapteren tilkoblinger på port 502."
     },
     "name": "Navn",
     "default_name": "Ventilasjon",
