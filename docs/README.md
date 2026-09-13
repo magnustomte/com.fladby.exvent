@@ -4,13 +4,17 @@ Reference material for the Modbus register maps this app talks to.
 
 ## Automation platforms
 
-Enervent ventilation units ship with one of two automation families, and they do **not**
-share a register map:
+Exvent units, made by Enervent and sold under that name outside Norway, come with one of two
+automation families, and they do **not** share a register map:
 
-| Platform | Used by | Register list |
+| Platform | App driver | Register list |
 | --- | --- | --- |
-| **MD** | eAir, eWind | `eAirMD-modbus-register-list-public.xlsx`, `eWind-modbus-register-list-public.xlsx` |
-| **EDA** | Older units reached through a Freeway WEB bus adapter | `EDA_Modbus_Registers_2011_09_14.pdf` (in this folder) |
+| **MD** | `eWind`, `eAir` | `eAirMD-modbus-register-list-public.xlsx`, `eWind-modbus-register-list-public.xlsx` |
+| **EDA** | `eda` | `EDA_Modbus_Registers_2011_09_14.pdf` (in this folder) |
+
+EDA units reach the network through a Freeway WEB bus adapter. It presents the unit on Modbus
+slave ID 1 and accepts Modbus TCP connections from a single client address, configured in its
+web interface.
 
 The MD lists are published on the [Enervent document
 server](https://doc.enervent.com/out/out.ViewFolder.php?folderid=16&showtree=1) and are not
@@ -55,6 +59,23 @@ Verified against a live unit by reading the real-time clock block, which is unam
 | 41 | Month | 9 | September |
 | 42 | Year (+2000) | 26 | 2026 |
 
+## Writing through Freeway WEB
+
+Freeway WEB answers "write single coil" (function code 5) and "write single register" (6) with
+a well-formed echo, but does not pass the write on to the unit. "Write multiple coils" (15) and
+"write multiple registers" (16) go through, so the `eda` driver writes with those.
+
+Verified on a live unit:
+
+| Write | Function code | Result |
+| --- | --- | --- |
+| Setpoint 20.0 °C to holding register 135 | 6 | Acknowledged, but the register still read 22.0 °C immediately, after 5 s and in the Freeway web interface |
+| The same setpoint | 16 | Applied at once |
+| Stop on, coil 0 | 5 | No effect; the echo carried value 0 and the coil read back 0 |
+| Overpressure on, coil 3 | 15 | Applied; status bit 1024 set and 10 minutes remaining |
+
+eWind and eAir are reached through other gateways and keep using codes 5 and 6.
+
 ## Holding register 44 — status bit field
 
 Several states can be active at once; the register holds their sum. The Freeway WEB interface
@@ -79,6 +100,9 @@ renders the same bits under **Status**, with slightly different wording:
 | 16384 | Summernight cooling | Summer night cooling |
 | 32768 | EDX defrosting | EXT melting |
 
+The register is read as a signed 16-bit value, so mask it with `0xffff` before testing bits or
+the defrosting bit arrives as a negative number.
+
 ## Defrosting
 
 Bit 32768 is named after the EDX product line, which uses an outdoor unit, but it is **also**
@@ -91,24 +115,70 @@ anti-icing of the heat exchanger via the pressure switch (limits in registers 16
 separate mechanism that may well be switched off on a unit that still defrosts its heat pump.
 Register 644 sets how long the heat pump stays off after a defrost cycle.
 
+## Registers the `eda` driver uses
+
+| Address | Meaning | In the app |
+| --- | --- | --- |
+| Coils 0, 1, 3, 10 | Stop, away, overpressure, manual boost | Mode picker, overpressure quick action |
+| Coil 28 | Cooling in operation | Reading |
+| Coil 30 | Heat recovery running | Reading |
+| Coil 32 | Heating in operation | Reading |
+| Coil 42 | B alarm active | Filter alarm |
+| Coil 49 | Service reminder on or off | Device setting |
+| Coil 52 | Cooling allowed | Device setting and picker |
+| Coil 54 | Heating allowed | Device setting and picker |
+| Holding 6–10, 13 | Temperatures, extract air humidity | Readings |
+| Holding 29, 30 | Heat recovery efficiency | Readings |
+| Holding 44 | Status bit field | Mode, defrosting, overpressure |
+| Holding 45 | Temperature control step | Status |
+| Holding 50, 53 | Fan level in effect, fan level set on the panel | Readings |
+| Holding 57 | Overpressure duration in minutes | Device setting |
+| Holding 135 | Temperature setpoint, ×10 | Target temperature |
+| Holding 164, 196 | Outdoor temperature below which cooling and above which heating are blocked, ×10 | Device settings |
+| Holding 538 | Service reminder interval in days, 180 by default | Device setting |
+
+Device settings are stored on the unit. The app reads them back on every poll, so a change made
+on the unit's panel shows up in Homey.
+
+## Alarms
+
+The newest alarm is in holding registers 385–391: type, state (`0` off, `1` reset, `2` on) and
+time. Type 14 is the service reminder and types 16 and 17 are dirty supply and extract filters.
+Coil 42 is set while any B alarm is active, which is what the app shows as the filter alarm, so
+it also covers the service reminder.
+
+According to the register list and eda-modbus-bridge, writing `1` to register 386 acknowledges
+the newest alarm. The app does not do this, and it has not been tested.
+
+The filter alarms rely on differential pressure transmitters, which are an accessory. Without
+them, registers 14 and 15 and the alarm limits in 566 and 567 read 0, and the service reminder is
+the unit's only prompt to change the filters.
+
+## Maximum heating and cooling
+
+Coils 6 and 7 do not force heating or cooling unconditionally. The function runs only until the
+temperature setpoint is reached. On a unit already at its setpoint the write is accepted and the
+coil drops back to 0 at once, as seen with an extract air temperature of 22.5 °C against a
+setpoint of 22.0 °C. Raising the setpoint is what makes the unit heat.
+
 ## Notes for this app
 
 - **Holding register 50 is a ventilation level in percent (20–100) on EC/DC fans, not a 1–4
   step.** Register 53 holds the level selected on the panel; register 50 holds the level
   actually in effect after boost, overpressure and heat-pump overrides. Expose both — otherwise
   a user who sets 40% and sees 70% will think the app is broken.
-- **Holding register 44 is a bit field**, not an enumeration. Several states can be active at
-  once and the register is their sum.
+- **Holding register 44 is a bit field**, not an enumeration. Decoding it bit by bit is what
+  makes defrost, stop and combined states visible at all; matching the register against single
+  values silently loses them.
 - **Coil 52 is "cooling allowed" and coil 54 is "heating allowed."** They are configuration
   bits that persist across power cycles, not momentary commands.
 - **Coil 40 (eco mode) exists on MD only.** On EDA that address is reserved.
-- Holding register 135 (temperature setpoint) accepts 10–30 °C, scaled ×10.
+- Holding register 135 (temperature setpoint) accepts 10–30 °C, scaled ×10. EDA units also hold
+  the setpoint limits allowed on the panel in registers 140 and 141.
 - Heat-pump units force the fans to at least 70% whenever the heat pump runs, regardless of the
   level set on the panel. Expect register 50 to jump to 70 on its own; that is the unit, not a
   bug. For the same reason the manual advises against Away and Long away on these units — they
   drop the fans to 30% and 20%, and save no energy.
-- Decoding register 44 as a bit field is what makes defrost, stop and combined states visible
-  at all. Matching the register against single values silently loses them.
 
 ## Credits
 
