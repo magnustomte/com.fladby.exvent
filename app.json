@@ -2495,7 +2495,7 @@
         "no": "Filteralarm"
       },
       "getable": true,
-      "setable": true,
+      "setable": false,
       "uiComponent": "sensor"
     },
     "cooling_active": {
