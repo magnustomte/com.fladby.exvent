@@ -1,9 +1,9 @@
-Styr og overvåk ventilasjonsaggregatet ditt fra Exvent eller Enervent med Homey. Appen leser temperaturer, luftfuktighet, viftenivå, virkningsgrad for varmegjenvinningen og om aggregatet varmer, kjøler eller gjenvinner varme, og lar deg sette modus og ønsket temperatur fra Flyter.
+Overvåk og styr ventilasjonsaggregatet ditt fra Exvent med Homey. Se temperaturer, luftfuktighet, viftenivå og varmegjenvinning, sett modus og ønsket temperatur, og automatiser det med Flyter.
 
 Støttede enheter
 - Exvent eWind
 - Exvent eAir
-- Enervent-aggregater med EDA-automatikk, via en Freeway WEB-bussadapter
+- Exvent-aggregater med EDA-automatikk, tilkoblet via en Freeway WEB-adapter
 
 Før du legger til en eWind eller eAir, slår du på Modbus TCP i Exvent-appen.
 

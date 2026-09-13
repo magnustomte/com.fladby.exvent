@@ -15,8 +15,8 @@
     "no": "Exvent"
   },
   "description": {
-    "en": "Monitor and control Exvent and Enervent ventilation units from Homey.",
-    "no": "Overvåk og styr ventilasjonsaggregater fra Exvent og Enervent med Homey."
+    "en": "Monitor and control Exvent ventilation units from Homey.",
+    "no": "Overvåk og styr ventilasjonsaggregater fra Exvent med Homey."
   },
   "category": [
     "climate"
