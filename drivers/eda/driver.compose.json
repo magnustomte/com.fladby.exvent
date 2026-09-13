@@ -23,7 +23,8 @@
     "eWindstatus",
     "eWindstatus_mode",
     "lastPollTime",
-    "heating_coil_state"
+    "heating_coil_state",
+    "cooling_allowed"
   ],
   "capabilitiesOptions": {
     "measure_temperature.exhaustAir": {
@@ -185,6 +186,12 @@
       },
       "units": {
         "en": "%"
+      }
+    },
+    "cooling_allowed": {
+      "title": {
+        "en": "Cooling allowed",
+        "no": "Kjøling tillatt"
       }
     }
   },

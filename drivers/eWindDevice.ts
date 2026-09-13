@@ -21,13 +21,15 @@ interface UnitSetting {
     scale?: number;
     /** The driver feature that enables the setting. */
     feature: keyof DriverFeatures;
+    /** A capability showing the same coil in the device view, as '1' or '0'. */
+    capability?: string;
 }
 
 /** Keyed by device setting id. The values live on the unit, not in Homey. */
 const UNIT_SETTINGS: Record<string, UnitSetting> = {
     overpressure_duration: { kind: 'holding', address: 57, feature: 'overpressureTiming' },
-    heating_allowed: { kind: 'coil', address: 54, feature: 'seasonControl' },
-    cooling_allowed: { kind: 'coil', address: 52, feature: 'seasonControl' },
+    heating_allowed: { kind: 'coil', address: 54, feature: 'seasonControl', capability: 'heating_coil_state' },
+    cooling_allowed: { kind: 'coil', address: 52, feature: 'seasonControl', capability: 'cooling_allowed' },
     heating_block_temperature: { kind: 'holding', address: 196, scale: 10, feature: 'seasonControl' },
     cooling_block_temperature: { kind: 'holding', address: 164, scale: 10, feature: 'seasonControl' },
 };
@@ -39,6 +41,7 @@ const OPTIONAL_POLL_KEYS: Record<string, keyof DriverFeatures> = {
     eco_mode: 'ecoMode',
     fan_speed_panel: 'heatPumpStatus',
     cooling_status: 'heatPumpStatus',
+    cooling_allowed: 'seasonControl',
 };
 
 /** Capabilities a device has only when their driver feature is on. */
@@ -47,6 +50,7 @@ const OPTIONAL_CAPABILITIES: Record<string, keyof DriverFeatures> = {
     'fanspeed_level.panel': 'heatPumpStatus',
     cooling_active: 'heatPumpStatus',
     defrosting: 'heatPumpStatus',
+    cooling_allowed: 'seasonControl',
 };
 
 /** Turns a jsmodbus rejection into a reason a user can act on. */
@@ -449,6 +453,10 @@ export class EWindDevice extends eWind {
     private async writeUnitSetting(setting: UnitSetting, value: number | boolean) {
         if (setting.kind === 'coil') {
             await this.sendCoilRequest(setting.address, Boolean(value));
+            // Keep the device view in step without waiting for the next poll
+            if (setting.capability !== undefined && this.hasCapability(setting.capability)) {
+                await this.setCapabilityValue(setting.capability, value ? '1' : '0');
+            }
             return;
         }
         // Registers are 16-bit; negative values go out as two's complement
@@ -630,12 +638,22 @@ export class EWindDevice extends eWind {
                 : (value === false || value === '0' || value === 'false')
                     ? false
                     : null;
-            if (coilValue !== null) {
-                await this.sendCoilRequest(54, coilValue);
-            } else {
+            if (coilValue === null) {
                 // Invalid heater value; ignore
+            } else if (this.driver.features.seasonControl) {
+                // Also updates the "heating allowed" device setting straight away
+                await this.setUnitSetting('heating_allowed', coilValue);
+            } else {
+                await this.sendCoilRequest(54, coilValue);
             }
         });
+
+        if (this.driver.features.seasonControl) {
+            this.registerCapabilityListener('cooling_allowed', async (value) => {
+                if (!this.isUsable()) return;
+                await this.setUnitSetting('cooling_allowed', value === '1');
+            });
+        }
     
         this.capabilityListenersRegistered = true;
     }

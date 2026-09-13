@@ -2106,7 +2106,8 @@
         "eWindstatus",
         "eWindstatus_mode",
         "lastPollTime",
-        "heating_coil_state"
+        "heating_coil_state",
+        "cooling_allowed"
       ],
       "capabilitiesOptions": {
         "measure_temperature.exhaustAir": {
@@ -2268,6 +2269,12 @@
           },
           "units": {
             "en": "%"
+          }
+        },
+        "cooling_allowed": {
+          "title": {
+            "en": "Cooling allowed",
+            "no": "Kjøling tillatt"
           }
         }
       },
@@ -2467,6 +2474,41 @@
         "en": "Cooling stopped",
         "no": "Kjøling stoppet"
       }
+    },
+    "cooling_allowed": {
+      "type": "enum",
+      "title": {
+        "en": "Cooling allowed",
+        "no": "Kjøling tillatt"
+      },
+      "desc": {
+        "en": "Whether the unit may cool the supply air",
+        "no": "Om aggregatet får kjøle tilluften"
+      },
+      "getable": true,
+      "setable": true,
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Cooling allowed changed",
+        "no": "Kjøling tillatt endret"
+      },
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "1",
+          "title": {
+            "en": "Allowed",
+            "no": "Tillatt"
+          }
+        },
+        {
+          "id": "0",
+          "title": {
+            "en": "Blocked",
+            "no": "Sperret"
+          }
+        }
+      ]
     },
     "defrosting": {
       "type": "boolean",

@@ -30,6 +30,7 @@ export class eWind extends Homey.Device {
         "heat_exchanger_state": [30, 1, 'UINT32', "State of Heat exchanger On/Off"], 
         "heating_coil": [54, 1, 'UINT32', "State of Heater coil On/Off"], 
         "cooling_status": [28, 1, 'UINT32', "Cooling in operation"],
+        "cooling_allowed": [52, 1, 'UINT32', "Cooling allowed"],
     };
 
     /**
@@ -157,6 +158,10 @@ export class eWind extends Homey.Device {
 
         if (result['cooling_status'] && result['cooling_status'].value !== 'xxx') {
             await this.setIfChanged('cooling_active', result['cooling_status'].value === '1');
+        }
+
+        if (result['cooling_allowed'] && result['cooling_allowed'].value !== 'xxx') {
+            await this.setIfChanged('cooling_allowed', result['cooling_allowed'].value === '1' ? '1' : '0');
         }
 
         if (result['eco_mode'] && result['eco_mode'].value !== 'xxx') {
