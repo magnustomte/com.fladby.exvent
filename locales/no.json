@@ -13,7 +13,7 @@
       "intro": "Skriv inn IP-adressen og porten til Freeway WEB-adapteren som er koblet til EDA-aggregatet. Aktiver først Modbus/TCP i Freeway sitt eget webgrensesnitt: Configuration → Access control configuration, skriv IP-adressen til Homey i «IP address of Modbus/TCP client» og klikk Save Modbus/TCP. Før det avviser adapteren tilkoblinger på port 502."
     },
     "name": "Navn",
-    "default_name": "Ventilasjon",
+    "default_name": "Exvent ventilasjon",
     "address": "IP-adresse",
     "port": "Port",
     "connect": "Koble til",
