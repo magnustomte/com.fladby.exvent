@@ -355,6 +355,48 @@
           }
         }
       ]
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "Service reminder",
+        "no": "Servicepåminnelse"
+      },
+      "children": [
+        {
+          "id": "service_reminder",
+          "type": "checkbox",
+          "value": true,
+          "label": {
+            "en": "Service reminder",
+            "no": "Servicepåminnelse"
+          },
+          "hint": {
+            "en": "Whether the unit raises a B alarm reminding you to service it and change the filters. Stored on the unit.",
+            "no": "Om aggregatet gir en B-alarm som minner deg på service og filterbytte. Lagres på aggregatet."
+          }
+        },
+        {
+          "id": "service_reminder_interval",
+          "type": "number",
+          "value": 180,
+          "min": 1,
+          "max": 365,
+          "step": 1,
+          "units": {
+            "en": "days",
+            "no": "døgn"
+          },
+          "label": {
+            "en": "Interval",
+            "no": "Intervall"
+          },
+          "hint": {
+            "en": "Days between reminders. Enervent recommends changing the filters every six months. Stored on the unit.",
+            "no": "Døgn mellom hver påminnelse. Enervent anbefaler filterbytte hvert halvår. Lagres på aggregatet."
+          }
+        }
+      ]
     }
   ]
 }

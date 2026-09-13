@@ -17,6 +17,8 @@ export interface DriverFeatures {
      * cooling in operation.
      */
     heatPumpStatus: boolean;
+    /** Service reminder on or off (coil 49) and its interval (holding register 538), as device settings. */
+    serviceReminder: boolean;
 }
 
 /**
@@ -38,6 +40,7 @@ export class EWindDriver extends Homey.Driver {
             overpressureTiming: false,
             seasonControl: false,
             heatPumpStatus: false,
+            serviceReminder: false,
         };
     }
 

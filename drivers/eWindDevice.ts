@@ -32,6 +32,8 @@ const UNIT_SETTINGS: Record<string, UnitSetting> = {
     cooling_allowed: { kind: 'coil', address: 52, feature: 'seasonControl', capability: 'cooling_allowed' },
     heating_block_temperature: { kind: 'holding', address: 196, scale: 10, feature: 'seasonControl' },
     cooling_block_temperature: { kind: 'holding', address: 164, scale: 10, feature: 'seasonControl' },
+    service_reminder: { kind: 'coil', address: 49, feature: 'serviceReminder' },
+    service_reminder_interval: { kind: 'holding', address: 538, feature: 'serviceReminder' },
 };
 
 const CONNECTION_SETTINGS = ['address', 'port', 'unitId'];

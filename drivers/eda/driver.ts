@@ -12,6 +12,7 @@ class MyEdaDriver extends EWindDriver {
             overpressureTiming: true,
             seasonControl: true,
             heatPumpStatus: true,
+            serviceReminder: true,
         };
     }
 
