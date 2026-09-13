@@ -393,8 +393,8 @@
             "no": "Intervall"
           },
           "hint": {
-            "en": "Days between reminders. Enervent recommends changing the filters every six months. Stored on the unit.",
-            "no": "Døgn mellom hver påminnelse. Enervent anbefaler filterbytte hvert halvår. Lagres på aggregatet."
+            "en": "Days between reminders. Exvent recommends changing the filters every six months. Stored on the unit.",
+            "no": "Døgn mellom hver påminnelse. Exvent anbefaler filterbytte hvert halvår. Lagres på aggregatet."
           }
         }
       ]
