@@ -19,6 +19,8 @@ export interface DriverFeatures {
     heatPumpStatus: boolean;
     /** Service reminder on or off (coil 49) and its interval (holding register 538), as device settings. */
     serviceReminder: boolean;
+    /** Overpressure on or off as a capability, so it can be the device's quick action. */
+    overpressureSwitch: boolean;
 }
 
 /**
@@ -41,6 +43,7 @@ export class EWindDriver extends Homey.Driver {
             seasonControl: false,
             heatPumpStatus: false,
             serviceReminder: false,
+            overpressureSwitch: false,
         };
     }
 

@@ -53,6 +53,7 @@ const OPTIONAL_CAPABILITIES: Record<string, keyof DriverFeatures> = {
     cooling_active: 'heatPumpStatus',
     defrosting: 'heatPumpStatus',
     cooling_allowed: 'seasonControl',
+    overpressure: 'overpressureSwitch',
 };
 
 /** Turns a jsmodbus rejection into a reason a user can act on. */
@@ -416,6 +417,9 @@ export class EWindDevice extends eWind {
         }
         if (this.isActive) {
             await this.setCapabilityValue('eWindstatus_mode', value);
+            if (this.hasCapability('overpressure')) {
+                await this.setCapabilityValue('overpressure', value === '2');
+            }
         }
     }
 
@@ -654,6 +658,14 @@ export class EWindDevice extends eWind {
             this.registerCapabilityListener('cooling_allowed', async (value) => {
                 if (!this.isUsable()) return;
                 await this.setUnitSetting('cooling_allowed', value === '1');
+            });
+        }
+
+        if (this.driver.features.overpressureSwitch) {
+            // Overpressure runs for the configured duration; switching it off returns to home
+            this.registerCapabilityListener('overpressure', async (value) => {
+                if (!this.isUsable()) return;
+                await this.setEWindValue(value ? '2' : '0');
             });
         }
     

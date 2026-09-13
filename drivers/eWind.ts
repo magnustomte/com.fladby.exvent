@@ -150,6 +150,9 @@ export class eWind extends Homey.Device {
             if (this.hasCapability('defrosting')) {
                 await this.setIfChanged('defrosting', Boolean(state & 32768));
             }
+            if (this.hasCapability('overpressure')) {
+                await this.setIfChanged('overpressure', Boolean(state & 1024));
+            }
         }
 
         if (result['fan_speed_panel'] && result['fan_speed_panel'].value !== 'xxx') {

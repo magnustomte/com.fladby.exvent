@@ -2107,7 +2107,8 @@
         "eWindstatus_mode",
         "lastPollTime",
         "heating_coil_state",
-        "cooling_allowed"
+        "cooling_allowed",
+        "overpressure"
       ],
       "capabilitiesOptions": {
         "measure_temperature.exhaustAir": {
@@ -3033,6 +3034,27 @@
       "insightsTitleFalse": {
         "en": "Poll time changed",
         "no": "Polling endret"
+      }
+    },
+    "overpressure": {
+      "type": "boolean",
+      "title": {
+        "en": "Overpressure",
+        "no": "Overtrykk"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": null,
+      "uiQuickAction": true,
+      "icon": "/assets/statusmode.svg",
+      "insights": true,
+      "insightsTitleTrue": {
+        "en": "Overpressure started",
+        "no": "Overtrykk startet"
+      },
+      "insightsTitleFalse": {
+        "en": "Overpressure ended",
+        "no": "Overtrykk avsluttet"
       }
     }
   }
